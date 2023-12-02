@@ -10,4 +10,23 @@ window.onload = function () {
 
   startGameBtn.addEventListener("click", () => startNewGame());
   restartGameBtn.addEventListener("click", () => location.reload());
+
+  window.addEventListener("keydown", (keyDown) => {
+    if (keyDown.code === "KeyW") {
+      //implement keybinds here, use class settings and do settings.keyMovementUp
+      game.player.changeFacingDirection("up");
+    }
+    if (keyDown.code === "KeyS") {
+      //implement keybinds here, use class settings and do settings.keyMovementUp
+      game.player.changeFacingDirection("down");
+    }
+    if (keyDown.code === "KeyD") {
+      //implement keybinds here, use class settings and do settings.keyMovementUp
+      game.player.changeFacingDirection("right");
+    }
+    if (keyDown.code === "KeyA") {
+      //implement keybinds here, use class settings and do settings.keyMovementUp
+      game.player.changeFacingDirection("left");
+    }
+  });
 };
