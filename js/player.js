@@ -6,9 +6,9 @@ class Player extends Entity {
     this.top = 280;
     this.height = 42;
     this.width = 35;
-    this.directionX = 0; //check if I need to handle movement differently
+    this.directionX = 0;
     this.directionY = 0;
-    this.speed = 0.7; //experiment with this
+    this.speed = 0.8; //experiment with this
 
     this.element.src = "./images/player_down.png";
     this.setSizeAndPos();
@@ -30,6 +30,20 @@ class Player extends Entity {
       case "right":
         this.element.src = "./images/player_right.png";
         break;
+    }
+  }
+
+  move() {
+    let newLeft = this.left + this.directionX * this.speed;
+    let newTop = this.top + this.directionY * this.speed;
+
+    if (newLeft > 0 && newLeft < 600 - this.width) {
+      this.left = newLeft;
+      this.element.style.left = `${this.left}px`;
+    }
+    if (newTop > 0 && newTop < 600) {
+      this.top = newTop;
+      this.element.style.top = `${this.top}px`;
     }
   }
 }
