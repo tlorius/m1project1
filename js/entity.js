@@ -8,17 +8,25 @@ class Entity {
     this.width = 0;
     this.directionX = 0; //check if I need to handle movement differently
     this.directionY = 0;
+    this.speed = 1;
 
     this.element = document.createElement("img");
-    //this.element.src = "";
     this.element.style.position = "absolute";
     this.mainGameScreen.appendChild(this.element);
   }
 
-  updatePosition() {
-    this.element.style.left = `${this.left}px`;
-    this.element.style.top = `${this.top}px`;
+  setSizeAndPos() {
     this.element.style.height = `${this.height}px`;
     this.element.style.width = `${this.width}px`;
+    this.element.style.left = `${this.left}px`;
+    this.element.style.top = `${this.top}px`;
+  }
+
+  move() {
+    this.left += this.directionX * this.speed;
+    this.top += this.directionY * this.speed;
+
+    this.element.style.left = `${this.left}px`;
+    this.element.style.top = `${this.top}px`;
   }
 }

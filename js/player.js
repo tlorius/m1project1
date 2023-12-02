@@ -2,16 +2,18 @@ class Player extends Entity {
   constructor(mainGameScreen) {
     super(mainGameScreen);
     this.health = 10;
-    this.left = 300; //currently doesnt work, same with top
-    this.top = 300;
+    this.left = 285;
+    this.top = 280;
     this.height = 42;
     this.width = 35;
     this.directionX = 0; //check if I need to handle movement differently
     this.directionY = 0;
+    this.speed = 0.7; //experiment with this
 
     this.element.src = "./images/player_down.png";
-    this.updatePosition();
+    this.setSizeAndPos();
   }
+
   changeFacingDirection(facingDirection) {
     switch (
       facingDirection //"down", "up", "left", "right"

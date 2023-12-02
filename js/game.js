@@ -27,14 +27,15 @@ class Game {
   }
 
   gameLoop() {
+    this.player.move();
     //create enemies here
     //wave logic might need to be worked out/in here
     //update UI elements for HP
-    console.log("gameloop ongoing...");
     if (this.gameState === "Win" || this.gameState === "Lose") {
       //Code for won game or lost game, can replace with second if else statement if needed to separate
+      console.log("game over");
     } else {
-      this.gameLoopAnimationId = requestAnimationFrame(() => this.gameLoop);
+      this.gameLoopAnimationId = requestAnimationFrame(() => this.gameLoop());
     }
   }
 }
