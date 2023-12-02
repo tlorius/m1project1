@@ -9,27 +9,24 @@ class Player extends Entity {
     this.directionX = 0;
     this.directionY = 0;
     this.speed = 0.8; //experiment with this
+    this.aimingUp = 0; // 3 states, -1 = aiming down, 0 = neutral, 1 = aiming up, allows for combination with aiming left for 8 directional aim
+    this.aimingLeft = 0;
+    this.shootingOnCooldown = false;
+    this.shootingCooldownInSeconds = 0.3;
 
     this.element.src = "./images/player_down.png";
     this.setSizeAndPos();
   }
 
-  changeFacingDirection(facingDirection) {
-    switch (
-      facingDirection //"down", "up", "left", "right"
-    ) {
-      case "down":
-        this.element.src = "./images/player_down.png";
-        break;
-      case "up":
-        this.element.src = "./images/player_up.png";
-        break;
-      case "left":
-        this.element.src = "./images/player_left.png";
-        break;
-      case "right":
-        this.element.src = "./images/player_right.png";
-        break;
+  aim() {
+    if (this.aimingLeft === 1) {
+      this.element.src = "./images/player_left.png";
+    } else if (this.aimingLeft === -1) {
+      this.element.src = "./images/player_right.png";
+    } else if (this.aimingUp === 1) {
+      this.element.src = "./images/player_up.png";
+    } else if (this.aimingUp === -1) {
+      this.element.src = "./images/player_down.png";
     }
   }
 
@@ -44,6 +41,24 @@ class Player extends Entity {
     if (newTop > 0 && newTop < 600) {
       this.top = newTop;
       this.element.style.top = `${this.top}px`;
+    }
+  }
+
+  shooting() {
+    //logic for shooting, in script we alrdy have key input checks for changing direction -> reuse
+    //define facingUp = -1 0 1 // example up -1, left 1 => facing bottom left;;up 1 left 0, just up; up 0 left
+    //define facingleft = -1 0 1
+    if (
+      (this.aimingLeft === 0 && this.aimingUp === 0) ||
+      this.shootingOnCooldown === true
+    ) {
+      return false;
+    } else {
+      this.shootingOnCooldown = true;
+      setTimeout(() => {
+        this.shootingOnCooldown = false;
+      }, this.shootingCooldownInSeconds * 1000);
+      return true;
     }
   }
 }

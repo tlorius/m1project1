@@ -7,6 +7,7 @@ class Game {
     this.height = 600;
     this.width = 600;
     this.enemies = [];
+    this.projectiles = [];
     this.gameLoopAnimationId = null;
     this.score = 0;
     this.health = 10;
@@ -28,9 +29,44 @@ class Game {
 
   gameLoop() {
     this.player.move();
+    this.player.aim();
+
+    if (this.player.shooting()) {
+      //create new instance of projectile at players location with players current aim(pass on creation)
+      this.projectiles.push(
+        new Projectile(
+          this.mainGameScreen,
+          this.player.left,
+          this.player.top,
+          this.player.aimingUp,
+          this.player.aimingLeft
+        )
+      );
+    }
+
+    //removes projectiles that are off screen, first with .remove() and then removing them from the array holding their instances
+    const remainingProjectiles = [];
+    this.projectiles.forEach((currentProjectile) => {
+      currentProjectile.move();
+
+      if (
+        currentProjectile.top < -10 ||
+        currentProjectile.left < -10 ||
+        currentProjectile.top > 640 ||
+        currentProjectile.left > 610
+      ) {
+        currentProjectile.element.remove();
+      } else {
+        remainingProjectiles.push(currentProjectile);
+      }
+    });
+    this.projectiles = remainingProjectiles;
+
     //create enemies here
     //wave logic might need to be worked out/in here
     //update UI elements for HP
+
+    //create code shooting/creating a projectile here - projectile should only spawn if any arrowkey is pressed and cooldown is passed
     if (this.gameState === "Win" || this.gameState === "Lose") {
       //Code for won game or lost game, can replace with second if else statement if needed to separate
       console.log("game over");

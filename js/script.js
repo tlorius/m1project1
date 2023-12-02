@@ -15,16 +15,16 @@ window.onload = function () {
     //character "aiming" direction
     if (keyDown.code === "ArrowUp") {
       //implement keybinds here, use class settings and do settings.keyMovementUp
-      game.player.changeFacingDirection("up");
+      game.player.aimingUp = 1;
     }
     if (keyDown.code === "ArrowDown") {
-      game.player.changeFacingDirection("down");
+      game.player.aimingUp = -1;
     }
     if (keyDown.code === "ArrowRight") {
-      game.player.changeFacingDirection("right");
+      game.player.aimingLeft = -1;
     }
     if (keyDown.code === "ArrowLeft") {
-      game.player.changeFacingDirection("left");
+      game.player.aimingLeft = 1;
     }
     //character movement inputs
     if (keyDown.code === "KeyW") {
@@ -40,8 +40,9 @@ window.onload = function () {
       game.player.directionX = -1;
     }
   });
-  // keyUp logic ensures that the player doesn't stop moving when switching directions
+
   document.addEventListener("keyup", (keyUp) => {
+    // keyUp logic ensures that the player doesn't stop moving when switching directions
     switch (keyUp.code) {
       case "KeyW":
         game.player.directionY =
@@ -66,6 +67,33 @@ window.onload = function () {
           keyUp.code === "KeyA" && game.player.directionX === -1
             ? 0
             : game.player.directionX;
+        break;
+    }
+    // this switch statement ensures that the aim is return to neutral if keyUp events are registered
+    switch (keyUp.code) {
+      case "ArrowUp":
+        game.player.aimingUp =
+          keyUp.code === "ArrowUp" && game.player.aimingUp === 1
+            ? 0
+            : game.player.aimingUp;
+        break;
+      case "ArrowDown":
+        game.player.aimingUp =
+          keyUp.code === "ArrowDown" && game.player.aimingUp === -1
+            ? 0
+            : game.player.aimingUp;
+        break;
+      case "ArrowRight":
+        game.player.aimingLeft =
+          keyUp.code === "ArrowRight" && game.player.aimingLeft === -1
+            ? 0
+            : game.player.aimingLeft;
+        break;
+      case "ArrowLeft":
+        game.player.aimingLeft =
+          keyUp.code === "ArrowLeft" && game.player.aimingLeft === 1
+            ? 0
+            : game.player.aimingLeft;
         break;
     }
   });
