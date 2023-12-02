@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SpaceShooterGame</title>
+    <!-- Working Title, replace here and in trello once decided-->
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link
+      rel="icon"
+      href="images/enemy_regular_monster.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div id="game-intro-screen">
+      <img src="./images/player_down.png" alt="Intro Image" />
+      <!--Replace this image eventually-->
+      <button id="btn-start-game">Start Game</button>
+    </div>
+
+    <div id="container-game">
+      <div>
+        <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
+      </div>
+
+      <div id="main-game-screen"></div>
+    </div>
+
+    <div id="post-game-screen">
+      <h2>Game over placeholder</h2>
+      <button id="btn-restart-game">Restart</button>
+    </div>
+
+    <!-- Scripts-->
+    <script src="js/entity.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/projectile.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/powerup.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
