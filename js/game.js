@@ -9,8 +9,6 @@ class Game {
     this.enemies = [];
     this.projectiles = [];
     this.gameLoopAnimationId = null;
-    this.score = 0;
-    this.health = 10;
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
   }
 
@@ -33,6 +31,17 @@ class Game {
     this.enemies[1].move();
     //end of pseudo code
     this.gameLoop();
+  }
+
+  // Remove enemies from dom and array
+  purgeEnemies(enemiesToPurge) {
+    enemiesToPurge.forEach((enemyToRemove) => {
+      enemyToRemove.element.remove();
+    });
+
+    this.enemies = this.enemies.filter(
+      (enemy) => !enemiesToPurge.includes(enemy)
+    );
   }
 
   gameLoop() {
@@ -75,7 +84,7 @@ class Game {
         for (const currentEnemy of this.enemies) {
           if (currentProjectile.didCollide(currentEnemy)) {
             if (currentEnemy.diedFromReceivedDamage(currentProjectile.damage)) {
-              this.score += currentEnemy.pointsReceivedIfKilled;
+              this.player.score += currentEnemy.pointsReceivedIfKilled;
               enemiesToRemove.push(currentEnemy);
             }
             currentProjectile.element.remove();
@@ -90,37 +99,48 @@ class Game {
       }
     }
 
-    // Remove enemies that need to be removed
-    enemiesToRemove.forEach((enemyToRemove) => {
-      enemyToRemove.element.remove();
-    });
+    this.purgeEnemies(enemiesToRemove);
 
-    // Update the enemies array after removing enemies
-    this.enemies = this.enemies.filter(
-      (enemy) => !enemiesToRemove.includes(enemy)
-    );
     this.projectiles = remainingProjectiles;
 
     //TO BE ADDED: enemy collision with player logic
 
-    //maybe run the tracking only every 100 gameloops to save ressources but for now this is working
+    const enemiesToRemoveAfterPlayerCollision = [];
     this.enemies.forEach((currentEnemy) => {
-      currentEnemy.trackPlayerPosition(
-        this.player.top,
-        this.player.left,
-        this.player.height,
-        this.player.width
-      );
+      //update enemy player tracking every 50 gameloops, maybe remove this later if game runs smooth anyways
+      if (this.gameLoopAnimationId % 50 === 0) {
+        currentEnemy.trackPlayerPosition(
+          this.player.top,
+          this.player.left,
+          this.player.height,
+          this.player.width
+        );
+      }
       currentEnemy.move();
+
+      if (this.player.didCollide(currentEnemy)) {
+        enemiesToRemoveAfterPlayerCollision.push(currentEnemy);
+        this.player.health -= 1;
+      }
     });
+
+    this.purgeEnemies(enemiesToRemoveAfterPlayerCollision);
+
     //create enemies here
     //wave logic might need to be worked out/in here
-    //update UI elements for HP
-    document.getElementById("score").innerText = this.score;
-    document.getElementById("health").innerText = this.health;
-    //create code shooting/creating a projectile here - projectile should only spawn if any arrowkey is pressed and cooldown is passed
+
+    document.getElementById("score").innerText = this.player.score;
+    document.getElementById("health").innerText = this.player.health;
+
+    if (this.player.health <= 0) {
+      this.gameState = "Lose";
+    }
+
     if (this.gameState === "Win" || this.gameState === "Lose") {
       //Code for won game or lost game, can replace with second if else statement if needed to separate
+      this.mainGameScreen.style.display = "none";
+      this.gameOverScreen.style.display = "block";
+      this.player.element.remove();
       console.log("game over");
     } else {
       this.gameLoopAnimationId = requestAnimationFrame(() => this.gameLoop());

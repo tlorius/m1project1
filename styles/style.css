@@ -127,6 +127,9 @@ table {
 
 body {
   text-align: center;
+  background-color: #202124;
+  color: white;
+  font-size: 2rem;
 }
 
 #game-intro-screen {
