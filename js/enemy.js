@@ -10,6 +10,7 @@ class Enemy extends Entity {
     this.directionY = 0;
     this.speed = 0.4;
     this.pointsReceivedIfKilled = 1;
+    this.angleToPlayer = 0;
 
     this.element.src = "./images/enemy_regular_monster.png";
     this.setSizeAndPos();
@@ -22,5 +23,28 @@ class Enemy extends Entity {
     } else {
       return false;
     }
+  }
+
+  trackPlayerPosition(playerTop, playerLeft, playerHeight, playerWidth) {
+    let distanceToPlayer = { distTop: 0, distLeft: 0 };
+    // playertop + height takes the centerpoint of the player and calculates the distance to the centerpoint of the enemy
+    distanceToPlayer.distTop =
+      playerTop + playerHeight / 2 - (this.top + this.height / 2);
+    distanceToPlayer.distLeft =
+      playerLeft + playerWidth / 2 - (this.left + this.width / 2);
+
+    this.angleToPlayer = Math.atan2(
+      distanceToPlayer.distTop,
+      distanceToPlayer.distLeft
+    );
+  }
+
+  //math to calculate new position based on the calculated angle
+  move() {
+    this.left += Math.cos(this.angleToPlayer) * this.speed;
+    this.top += Math.sin(this.angleToPlayer) * this.speed;
+
+    this.element.style.left = `${this.left}px`;
+    this.element.style.top = `${this.top}px`;
   }
 }

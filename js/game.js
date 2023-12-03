@@ -80,7 +80,7 @@ class Game {
             currentProjectile.element.remove();
             projectileStillActive = false;
             break;
-          }
+          } //TO BE ADDED: use remaining enemies to clean enemies array, enemy collision with player logic
         }
         if (projectileStillActive) {
           remainingProjectiles.push(currentProjectile);
@@ -88,7 +88,17 @@ class Game {
       }
     }
     this.projectiles = remainingProjectiles;
-    console.log(this.enemies);
+
+    //maybe run the tracking only every 100 gameloops to save ressources but for now this is working
+    this.enemies.forEach((currentEnemy) => {
+      currentEnemy.trackPlayerPosition(
+        this.player.top,
+        this.player.left,
+        this.player.height,
+        this.player.width
+      );
+      currentEnemy.move();
+    });
 
     //create enemies here
     //wave logic might need to be worked out/in here
