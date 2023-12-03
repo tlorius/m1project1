@@ -103,7 +103,8 @@ class Game {
     //create enemies here
     //wave logic might need to be worked out/in here
     //update UI elements for HP
-
+    document.getElementById("score").innerText = this.score;
+    document.getElementById("health").innerText = this.health;
     //create code shooting/creating a projectile here - projectile should only spawn if any arrowkey is pressed and cooldown is passed
     if (this.gameState === "Win" || this.gameState === "Lose") {
       //Code for won game or lost game, can replace with second if else statement if needed to separate

@@ -9,7 +9,7 @@ class Enemy extends Entity {
     this.directionX = 0;
     this.directionY = 0;
     this.speed = 0.4;
-    this.pointsReceivedIfKilled = 1;
+    this.pointsReceivedIfKilled = 10;
     this.angleToPlayer = 0;
 
     this.element.src = "./images/enemy_regular_monster.png";
