@@ -8,7 +8,7 @@ class Player extends Entity {
     this.width = 35;
     this.directionX = 0;
     this.directionY = 0;
-    this.speed = 0.8; //experiment with this
+    this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
     this.aimingUp = 0; // 3 states, -1 = aiming down, 0 = neutral, 1 = aiming up, allows for combination with aiming left for 8 directional aim
     this.aimingLeft = 0;
     this.shootingOnCooldown = false;

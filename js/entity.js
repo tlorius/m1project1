@@ -29,4 +29,21 @@ class Entity {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
+
+  didCollide(objectToCollideWith) {
+    const mainEntityRect = this.element.getBoundingClientRect();
+    const objectToCollideWithRect =
+      objectToCollideWith.element.getBoundingClientRect();
+
+    if (
+      mainEntityRect.left < objectToCollideWithRect.right &&
+      mainEntityRect.right > objectToCollideWithRect.left &&
+      mainEntityRect.top < objectToCollideWithRect.bottom &&
+      mainEntityRect.bottom > objectToCollideWithRect.top
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

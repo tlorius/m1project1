@@ -24,6 +24,9 @@ class Game {
 
     this.player = new Player(this.mainGameScreen);
 
+    //remove this code later when better enemy code is implemented
+    this.enemies.push(new Enemy(this.mainGameScreen));
+
     this.gameLoop();
   }
 
@@ -56,6 +59,11 @@ class Game {
         currentProjectile.left > 610
       ) {
         currentProjectile.element.remove();
+      } else if (currentProjectile.didCollide(this.enemies[0])) {
+        //this logic should give the player points
+        //remove both the projectile and the enemy hit
+        currentProjectile.element.remove();
+        this.enemies[0].element.remove();
       } else {
         remainingProjectiles.push(currentProjectile);
       }
