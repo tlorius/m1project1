@@ -1,18 +1,22 @@
 class Player extends Entity {
   constructor(mainGameScreen) {
     super(mainGameScreen);
-    this.health = 10;
+    //base properties
     this.left = 285;
     this.top = 280;
     this.height = 42;
     this.width = 35;
     this.directionX = 0;
     this.directionY = 0;
-    this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
     this.aimingUp = 0; // 3 states, -1 = aiming down, 0 = neutral, 1 = aiming up, allows for combination with aiming left for 8 directional aim
     this.aimingLeft = 0;
+
+    //properties that we can modify using powerups
+    this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
+    this.health = 10;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3;
+    this.bulletDamage = 1; //allow this to be modified by powerups
 
     this.element.src = "./images/player_down.png";
     this.setSizeAndPos();

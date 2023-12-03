@@ -26,7 +26,12 @@ class Game {
 
     //remove this code later when better enemy code is implemented
     this.enemies.push(new Enemy(this.mainGameScreen));
+    this.enemies.push(new Enemy(this.mainGameScreen));
 
+    //pseudo code to move second enemy out of collision remove later
+    this.enemies[1].left = 200;
+    this.enemies[1].move();
+    //end of pseudo code
     this.gameLoop();
   }
 
@@ -42,14 +47,16 @@ class Game {
           this.player.left,
           this.player.top,
           this.player.aimingUp,
-          this.player.aimingLeft
+          this.player.aimingLeft,
+          this.player.bulletDamage
         )
       );
     }
 
     //removes projectiles that are off screen, first with .remove() and then removing them from the array holding their instances
     const remainingProjectiles = [];
-    this.projectiles.forEach((currentProjectile) => {
+    const remainingEnemies = [];
+    for (const currentProjectile of this.projectiles) {
       currentProjectile.move();
 
       if (
@@ -59,16 +66,29 @@ class Game {
         currentProjectile.left > 610
       ) {
         currentProjectile.element.remove();
-      } else if (currentProjectile.didCollide(this.enemies[0])) {
-        //this logic should give the player points
-        //remove both the projectile and the enemy hit
-        currentProjectile.element.remove();
-        this.enemies[0].element.remove();
       } else {
-        remainingProjectiles.push(currentProjectile);
+        let projectileStillActive = true;
+
+        for (const currentEnemy of this.enemies) {
+          //returns true if they collide
+          if (currentProjectile.didCollide(currentEnemy)) {
+            //returns true if enemy died
+            if (currentEnemy.diedFromReceivedDamage(currentProjectile.damage)) {
+              this.score += currentEnemy.pointsReceivedIfKilled; //give points to player
+              currentEnemy.element.remove();
+            }
+            currentProjectile.element.remove();
+            projectileStillActive = false;
+            break;
+          }
+        }
+        if (projectileStillActive) {
+          remainingProjectiles.push(currentProjectile);
+        }
       }
-    });
+    }
     this.projectiles = remainingProjectiles;
+    console.log(this.enemies);
 
     //create enemies here
     //wave logic might need to be worked out/in here

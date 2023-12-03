@@ -1,5 +1,12 @@
 class Projectile extends Entity {
-  constructor(mainGameScreen, playerLeft, playerTop, aimingUp, aimingLeft) {
+  constructor(
+    mainGameScreen,
+    playerLeft,
+    playerTop,
+    aimingUp,
+    aimingLeft,
+    damageValue
+  ) {
     super(mainGameScreen);
 
     //calculating the exact spawn location based on the direction the player is shooting
@@ -23,16 +30,15 @@ class Projectile extends Entity {
       this.top = playerTop + 37;
     }
 
+    //inverting player aim value to create desired trajectory
     this.directionY = aimingUp * -1;
     this.directionX = aimingLeft * -1;
-    this.speed = 1.5;
+    this.speed = 2;
     this.height = 10;
     this.width = 10;
+    this.damage = damageValue;
 
     this.element.src = "./images/projectile_bullet.png";
     this.setSizeAndPos();
   }
 }
-//could initialize with start location
-//and aiming values like the player to reuse variable given in script
-//possible property cooldown to prevent creation of new projectile and allow for powerups to modify it
