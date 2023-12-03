@@ -2,8 +2,17 @@ class Enemy extends Entity {
   constructor(mainGameScreen) {
     super(mainGameScreen);
     this.health = 3;
-    this.left = 100;
-    this.top = 100;
+    this.spawnSeed = Math.floor(Math.random() * 16);
+    this.spawnPointsLeft = [
+      -50, -50, -50, -50, -50, 630, 630, 630, 630, 630, 150, 300, 450, 150, 300,
+      450,
+    ];
+    this.spawnPointsTop = [
+      -50, 150, 300, 450, 630, -50, 150, 300, 450, 630, -50, -50, -50, 630, 630,
+      630,
+    ];
+    this.left = this.spawnPointsLeft[this.spawnSeed];
+    this.top = this.spawnPointsTop[this.spawnSeed];
     this.height = 30;
     this.width = 30;
     this.directionX = 0;

@@ -9,6 +9,7 @@ class Game {
     this.enemies = [];
     this.projectiles = [];
     this.gameLoopAnimationId = null;
+    this.lastEnemySpawnTime = performance.now();
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
   }
 
@@ -127,6 +128,16 @@ class Game {
     this.purgeEnemies(enemiesToRemoveAfterPlayerCollision);
 
     //create enemies here
+
+    const currentTime = performance.now();
+    const timeSinceLastSpawn = currentTime - this.lastEnemySpawnTime;
+
+    //spawn enemy every X ms
+    if (timeSinceLastSpawn > 2000) {
+      this.enemies.push(new Enemy(this.mainGameScreen));
+      this.lastEnemySpawnTime = currentTime;
+    }
+
     //wave logic might need to be worked out/in here
 
     document.getElementById("score").innerText = this.player.score;
