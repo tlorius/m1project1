@@ -53,9 +53,12 @@ class Game {
       );
     }
 
-    //removes projectiles that are off screen, first with .remove() and then removing them from the array holding their instances
+    //LOGIC: checks all projectiles, for collision: checks all current enemies
+    //dead enemies get removed from array and from dom, projectiles that leave area or collide get removed from array and dom
+
     const remainingProjectiles = [];
-    const remainingEnemies = [];
+    const enemiesToRemove = [];
+
     for (const currentProjectile of this.projectiles) {
       currentProjectile.move();
 
@@ -70,24 +73,35 @@ class Game {
         let projectileStillActive = true;
 
         for (const currentEnemy of this.enemies) {
-          //returns true if they collide
           if (currentProjectile.didCollide(currentEnemy)) {
-            //returns true if enemy died
             if (currentEnemy.diedFromReceivedDamage(currentProjectile.damage)) {
-              this.score += currentEnemy.pointsReceivedIfKilled; //give points to player
-              currentEnemy.element.remove();
+              this.score += currentEnemy.pointsReceivedIfKilled;
+              enemiesToRemove.push(currentEnemy);
             }
             currentProjectile.element.remove();
             projectileStillActive = false;
-            break;
-          } //TO BE ADDED: use remaining enemies to clean enemies array, enemy collision with player logic
+            break; // No need to check other enemies if collision occurred
+          }
         }
+
         if (projectileStillActive) {
           remainingProjectiles.push(currentProjectile);
         }
       }
     }
+
+    // Remove enemies that need to be removed
+    enemiesToRemove.forEach((enemyToRemove) => {
+      enemyToRemove.element.remove();
+    });
+
+    // Update the enemies array after removing enemies
+    this.enemies = this.enemies.filter(
+      (enemy) => !enemiesToRemove.includes(enemy)
+    );
     this.projectiles = remainingProjectiles;
+
+    //TO BE ADDED: enemy collision with player logic
 
     //maybe run the tracking only every 100 gameloops to save ressources but for now this is working
     this.enemies.forEach((currentEnemy) => {
@@ -99,7 +113,6 @@ class Game {
       );
       currentEnemy.move();
     });
-
     //create enemies here
     //wave logic might need to be worked out/in here
     //update UI elements for HP
