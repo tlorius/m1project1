@@ -5,13 +5,13 @@ class Game {
     this.gameOverScreen = document.getElementById("post-game-screen");
     this.gamePauseScreen = document.getElementById("game-pause-screen");
     this.settings = new Settings(this.gamePauseScreen);
+    this.enemySpawning = new EnemySpawning();
     this.player = null;
     this.height = 600;
     this.width = 600;
     this.enemies = [];
     this.projectiles = [];
     this.gameLoopAnimationId = null;
-    this.lastEnemySpawnTime = performance.now();
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
     this.isGamePaused = false;
   }
@@ -28,8 +28,8 @@ class Game {
     this.player = new Player(this.mainGameScreen);
 
     //testing new entities remove at the end
-    //this.enemies.push(new EnemyBoss(this.mainGameScreen));
-    // this.enemies.push(new EnemyBat(this.mainGameScreen));
+    //
+    //this.enemySpawning.currentWave = 8;
     //
 
     this.gameLoop();
@@ -47,10 +47,12 @@ class Game {
   }
 
   gameLoop() {
+    //opens pause screen if game is paused
     if (this.isGamePaused) {
       this.gamePauseScreen.style.display = "block";
       this.mainGameScreen.style.display = "none";
       console.log("game is paused.");
+      //prevents gameloop from running until unpaused
     } else {
       this.player.move();
       this.player.aim();
@@ -141,19 +143,49 @@ class Game {
 
       //create enemies here
 
-      const currentTime = performance.now();
-      const timeSinceLastSpawn = currentTime - this.lastEnemySpawnTime;
-
-      //spawn enemy every X ms
-      if (timeSinceLastSpawn > 2000) {
-        this.enemies.push(new EnemySlime(this.mainGameScreen));
-        this.lastEnemySpawnTime = currentTime;
-      }
+      // this.enemies.push(new EnemySlime(this.mainGameScreen));
+      // this.lastEnemySpawnTime = currentTime;
 
       //wave logic might need to be worked out/in here
+      const currentTime = performance.now();
+      this.enemySpawning.startNewWave(currentTime);
+      this.enemySpawning.endWave(currentTime);
+
+      const timeLeftInWave = parseInt(
+        this.enemySpawning.calcTimeLeftInWave(currentTime).toFixed(0)
+      );
+      if (timeLeftInWave <= 0) {
+        document.getElementById("wave-time-left").innerText =
+          "Next Wave incoming...";
+      } else {
+        document.getElementById(
+          "wave-time-left"
+        ).innerText = `Time left in Wave: ${timeLeftInWave}s`;
+      }
+
+      if (this.enemySpawning.canEnemySpawn(currentTime)) {
+        const enemyClassToSpawn =
+          this.enemySpawning.randomizeSpawn(currentTime);
+        if (enemyClassToSpawn === "slime") {
+          this.enemies.push(new EnemySlime(this.mainGameScreen));
+        } else if (enemyClassToSpawn === "bat") {
+          this.enemies.push(new EnemyBat(this.mainGameScreen));
+        } else if (enemyClassToSpawn === "boss") {
+          this.enemies.push(new EnemyBoss(this.mainGameScreen));
+        }
+      }
 
       document.getElementById("score").innerText = this.player.score;
       document.getElementById("health").innerText = this.player.health;
+      document.getElementById("wave").innerText =
+        this.enemySpawning.currentWave;
+      document.getElementById("bullet-dmg").innerText =
+        this.player.bulletDamage;
+      document.getElementById("atk-speed").innerText = (
+        1 / this.player.shootingCooldownInSeconds
+      ).toFixed(1);
+      // <p>Bullet damage: <span id="bullet-dmg"></span></p>
+      // <p>Attack speed: <span id="atk-speed"></span></p>
 
       if (this.player.health <= 0) {
         this.gameState = "Lose";

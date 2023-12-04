@@ -20,11 +20,18 @@
       <div>
         <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
         <h2>UI</h2>
+        <p>Current Wave: <span id="wave">0</span></p>
+        <p><span id="wave-time-left">0</span></p>
+        <br />
         <p>Score: <span id="score">0</span></p>
         <p>Health: <span id="health">0</span></p>
+        <br />
+        <p>Bullet damage: <span id="bullet-dmg">0</span></p>
+        <p>Attack speed: <span id="atk-speed">0</span> bullets per second</p>
       </div>
 
       <div id="main-game-screen"></div>
+      <div><p>controls: wasd - shoot, arrowkeys = shoot</p></div>
     </div>
 
     <div id="game-pause-screen">
@@ -37,6 +44,7 @@
     </div>
 
     <!-- Scripts-->
+    <script src="js/enemySpawning.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/entity.js"></script>
     <script src="js/player.js"></script>
