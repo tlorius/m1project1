@@ -23,14 +23,11 @@ class Game {
 
     this.player = new Player(this.mainGameScreen);
 
-    //remove this code later when better enemy code is implemented
-    this.enemies.push(new Enemy(this.mainGameScreen));
-    this.enemies.push(new Enemy(this.mainGameScreen));
+    //testing new entities remove at the end
+    //this.enemies.push(new EnemyBoss(this.mainGameScreen));
+    // this.enemies.push(new EnemyBat(this.mainGameScreen));
+    //
 
-    //pseudo code to move second enemy out of collision remove later
-    this.enemies[1].left = 200;
-    this.enemies[1].move();
-    //end of pseudo code
     this.gameLoop();
   }
 
@@ -121,7 +118,11 @@ class Game {
 
       if (this.player.didCollide(currentEnemy)) {
         enemiesToRemoveAfterPlayerCollision.push(currentEnemy);
-        this.player.health -= 1;
+        if (currentEnemy instanceof EnemyBoss) {
+          this.player.health = 0;
+        } else {
+          this.player.health -= 1;
+        }
       }
     });
 
@@ -134,7 +135,7 @@ class Game {
 
     //spawn enemy every X ms
     if (timeSinceLastSpawn > 2000) {
-      this.enemies.push(new Enemy(this.mainGameScreen));
+      this.enemies.push(new EnemySlime(this.mainGameScreen));
       this.lastEnemySpawnTime = currentTime;
     }
 
