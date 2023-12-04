@@ -3,25 +3,33 @@ class Enemy extends Entity {
     super(mainGameScreen);
     this.health = 3;
     this.spawnSeed = Math.floor(Math.random() * 16);
-    this.spawnPointsLeft = [
-      -50, -50, -50, -50, -50, 630, 630, 630, 630, 630, 150, 300, 450, 150, 300,
-      450,
+    this.spawnPoints = [
+      { left: -50, top: -50 },
+      { left: -50, top: 150 },
+      { left: -50, top: 300 },
+      { left: -50, top: 450 },
+      { left: -50, top: 630 },
+      { left: 630, top: -50 },
+      { left: 630, top: 150 },
+      { left: 630, top: 300 },
+      { left: 630, top: 450 },
+      { left: 630, top: 630 },
+      { left: 150, top: -50 },
+      { left: 300, top: -50 },
+      { left: 450, top: -50 },
+      { left: 150, top: 630 },
+      { left: 300, top: 630 },
+      { left: 450, top: 630 },
     ];
-    this.spawnPointsTop = [
-      -50, 150, 300, 450, 630, -50, 150, 300, 450, 630, -50, -50, -50, 630, 630,
-      630,
-    ];
-    this.left = this.spawnPointsLeft[this.spawnSeed];
-    this.top = this.spawnPointsTop[this.spawnSeed];
+    this.left = this.spawnPoints[this.spawnSeed].left;
+    this.top = this.spawnPoints[this.spawnSeed].top;
     this.height = 30;
     this.width = 30;
-    this.directionX = 0;
-    this.directionY = 0;
     this.speed = 0.4;
     this.pointsReceivedIfKilled = 10;
     this.angleToPlayer = 0;
 
-    this.element.src = "./images/enemy_regular_monster.png";
+    this.element.src = "./images/enemy_slime.png";
     this.setSizeAndPos();
   }
 
