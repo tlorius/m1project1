@@ -13,11 +13,14 @@ class Player extends Entity {
 
     //properties that we can modify using powerups
     this.score = 0;
+    this.experience = 0;
+    this.level = 0;
     this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
     this.health = 30;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3;
     this.bulletDamage = 1; //allow this to be modified by powerups
+    this.isInvincible = false;
 
     this.element.src = "./images/player_down.png";
     this.setSizeAndPos();

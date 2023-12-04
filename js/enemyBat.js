@@ -6,6 +6,7 @@ class EnemyBat extends Enemy {
     this.width = 39;
     this.speed = 1;
     this.pointsReceivedIfKilled = 10;
+    this.experienceIfKilled = 10;
 
     this.element.src = "./images/enemy_bat.png";
     this.setSizeAndPos();

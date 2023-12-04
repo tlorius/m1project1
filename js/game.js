@@ -29,7 +29,7 @@ class Game {
 
     //testing new entities remove at the end
     //
-    //this.enemySpawning.currentWave = 8;
+    this.enemySpawning.currentWave = 8;
     //
 
     this.gameLoop();
@@ -129,24 +129,25 @@ class Game {
         }
         currentEnemy.move();
 
+        //logic for player to lose hp
+        //note: invincibility only applies to non boss monsters, would be too strong
         if (this.player.didCollide(currentEnemy)) {
           enemiesToRemoveAfterPlayerCollision.push(currentEnemy);
           if (currentEnemy instanceof EnemyBoss) {
             this.player.health = 0;
           } else {
-            this.player.health -= 1;
+            if (!this.player.isInvincible) {
+              this.player.health -= 1;
+            } else {
+              this.player.score += currentEnemy.pointsReceivedIfKilled;
+            }
           }
         }
       });
 
       this.purgeEnemies(enemiesToRemoveAfterPlayerCollision);
 
-      //create enemies here
-
-      // this.enemies.push(new EnemySlime(this.mainGameScreen));
-      // this.lastEnemySpawnTime = currentTime;
-
-      //wave logic might need to be worked out/in here
+      //Wave spawning logic, majority of the calculations handled inside enemySpawning instance
       const currentTime = performance.now();
       this.enemySpawning.startNewWave(currentTime);
       this.enemySpawning.endWave(currentTime);
@@ -184,8 +185,6 @@ class Game {
       document.getElementById("atk-speed").innerText = (
         1 / this.player.shootingCooldownInSeconds
       ).toFixed(1);
-      // <p>Bullet damage: <span id="bullet-dmg"></span></p>
-      // <p>Attack speed: <span id="atk-speed"></span></p>
 
       if (this.player.health <= 0) {
         this.gameState = "Lose";

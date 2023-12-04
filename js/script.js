@@ -13,30 +13,30 @@ window.onload = function () {
 
   document.addEventListener("keydown", (keyDown) => {
     //character "aiming" direction
-    if (keyDown.code === "ArrowUp") {
+    if (keyDown.code === game.settings.keybindAimUp) {
       //implement keybinds here, use class settings and do settings.keyMovementUp
       game.player.aimingUp = 1;
     }
-    if (keyDown.code === "ArrowDown") {
+    if (keyDown.code === game.settings.keybindAimDown) {
       game.player.aimingUp = -1;
     }
-    if (keyDown.code === "ArrowRight") {
+    if (keyDown.code === game.settings.keybindAimRight) {
       game.player.aimingLeft = -1;
     }
-    if (keyDown.code === "ArrowLeft") {
+    if (keyDown.code === game.settings.keybindAimLeft) {
       game.player.aimingLeft = 1;
     }
     //character movement inputs
-    if (keyDown.code === "KeyW") {
+    if (keyDown.code === game.settings.keybindMoveUp) {
       game.player.directionY = -1;
     }
-    if (keyDown.code === "KeyS") {
+    if (keyDown.code === game.settings.keybindMoveDown) {
       game.player.directionY = 1;
     }
-    if (keyDown.code === "KeyD") {
+    if (keyDown.code === game.settings.keybindMoveRight) {
       game.player.directionX = 1;
     }
-    if (keyDown.code === "KeyA") {
+    if (keyDown.code === game.settings.keybindMoveLeft) {
       game.player.directionX = -1;
     }
     if (keyDown.code === "Escape") {
@@ -57,25 +57,29 @@ window.onload = function () {
     switch (keyUp.code) {
       case "KeyW":
         game.player.directionY =
-          keyUp.code === "KeyW" && game.player.directionY === -1
+          keyUp.code === game.settings.keybindMoveUp &&
+          game.player.directionY === -1
             ? 0
             : game.player.directionY;
         break;
       case "KeyS":
         game.player.directionY =
-          keyUp.code === "KeyS" && game.player.directionY === 1
+          keyUp.code === game.settings.keybindMoveDown &&
+          game.player.directionY === 1
             ? 0
             : game.player.directionY;
         break;
       case "KeyD":
         game.player.directionX =
-          keyUp.code === "KeyD" && game.player.directionX === 1
+          keyUp.code === game.settings.keybindMoveRight &&
+          game.player.directionX === 1
             ? 0
             : game.player.directionX;
         break;
       case "KeyA":
         game.player.directionX =
-          keyUp.code === "KeyA" && game.player.directionX === -1
+          keyUp.code === game.settings.keybindMoveLeft &&
+          game.player.directionX === -1
             ? 0
             : game.player.directionX;
         break;
@@ -84,25 +88,29 @@ window.onload = function () {
     switch (keyUp.code) {
       case "ArrowUp":
         game.player.aimingUp =
-          keyUp.code === "ArrowUp" && game.player.aimingUp === 1
+          keyUp.code === game.settings.keybindAimUp &&
+          game.player.aimingUp === 1
             ? 0
             : game.player.aimingUp;
         break;
       case "ArrowDown":
         game.player.aimingUp =
-          keyUp.code === "ArrowDown" && game.player.aimingUp === -1
+          keyUp.code === game.settings.keybindAimDown &&
+          game.player.aimingUp === -1
             ? 0
             : game.player.aimingUp;
         break;
       case "ArrowRight":
         game.player.aimingLeft =
-          keyUp.code === "ArrowRight" && game.player.aimingLeft === -1
+          keyUp.code === game.settings.keybindAimRight &&
+          game.player.aimingLeft === -1
             ? 0
             : game.player.aimingLeft;
         break;
       case "ArrowLeft":
         game.player.aimingLeft =
-          keyUp.code === "ArrowLeft" && game.player.aimingLeft === 1
+          keyUp.code === game.settings.keybindAimLeft &&
+          game.player.aimingLeft === 1
             ? 0
             : game.player.aimingLeft;
         break;

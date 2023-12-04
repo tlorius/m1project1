@@ -5,7 +5,8 @@ class EnemyBoss extends Enemy {
     this.height = 257;
     this.width = 308;
     this.speed = 0.2;
-    this.pointsReceivedIfKilled = 100;
+    this.pointsReceivedIfKilled = 1000;
+    this.experienceIfKilled = 100;
 
     this.element.src = "./images/enemy_boss.png";
     this.setSizeAndPos();
