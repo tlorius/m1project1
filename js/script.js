@@ -39,6 +39,17 @@ window.onload = function () {
     if (keyDown.code === "KeyA") {
       game.player.directionX = -1;
     }
+    if (keyDown.code === "Escape") {
+      game.isGamePaused = !game.isGamePaused;
+      console.log(game.isGamePaused);
+      if (!game.isGamePaused) {
+        game.gamePauseScreen.style.display = "none";
+        game.mainGameScreen.style.display = "block";
+        game.gameLoop();
+      }
+    }
+
+    //console.log(keyDown);
   });
 
   document.addEventListener("keyup", (keyUp) => {

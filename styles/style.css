@@ -157,3 +157,7 @@ body {
 #post-game-screen {
   display: none;
 }
+
+#game-pause-screen {
+  display: none;
+}
