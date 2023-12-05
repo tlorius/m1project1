@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>The lone guardian of the galaxy</title>
     <!-- Working Title, replace here and in trello once decided-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="icon" href="images/enemy_slime.png" type="image/x-icon" />
   </head>
@@ -19,7 +22,6 @@
     <div id="container-game">
       <div>
         <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
-        <p>Score: <span id="score">0</span></p>
         <p>Health: <span id="health">0</span></p>
         <br />
         <p>Bullet damage: <span id="bullet-dmg">0</span></p>
@@ -29,6 +31,7 @@
       <div id="main-game-screen">
         <div id="wave-ui">Wave: <span id="wave">0</span></div>
         <div id="wave-timer"><span id="wave-time-left">0</div>
+        <div id="score-ui">Score: <span id="score">0</div>
       </div>
       <div><p>controls: wasd - shoot, arrowkeys = shoot</p></div>
     </div>

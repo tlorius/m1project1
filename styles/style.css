@@ -125,11 +125,6 @@ table {
 
 /* css reset above */
 
-@font-face {
-  font-family: Grinched;
-  src: url("/m1project1/fonts/GrinchedRegular.otf");
-}
-
 body {
   text-align: center;
   background-color: #202124;
@@ -168,9 +163,10 @@ body {
 }
 
 #wave-ui,
-#wave-timer {
-  font-family: Grinched;
-  font-size: 1.3rem;
+#wave-timer,
+#score-ui {
+  font-family: "Nova Square";
+  font-size: 1rem;
   letter-spacing: 0.05rem;
   color: white;
   position: absolute;
@@ -178,11 +174,18 @@ body {
 
 #wave-ui {
   top: 10px;
-  left: 520px;
+  left: 500px;
 }
 
 #wave-timer {
   font-size: 1rem;
-  top: 35px;
-  left: 510px;
+  top: 30px;
+  left: 500px;
+}
+
+#score-ui {
+  font-size: 1rem;
+  font-weight: 400;
+  top: 10px;
+  left: 10px;
 }
