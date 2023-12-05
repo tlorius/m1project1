@@ -29,7 +29,7 @@ class Game {
 
     //testing new entities remove at the end
     //
-    this.enemySpawning.currentWave = 8;
+
     //
 
     this.gameLoop();

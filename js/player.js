@@ -22,7 +22,7 @@ class Player extends Entity {
     this.bulletDamage = 1; //allow this to be modified by powerups
     this.isInvincible = false;
 
-    this.element.src = "./images/player_down.png";
+    this.element.src = "images/player_down.png";
     this.setSizeAndPos();
   }
 
