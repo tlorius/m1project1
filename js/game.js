@@ -33,7 +33,7 @@ class Game {
 
     //testing new entities remove at the end
     //
-    //this.enemySpawning.currentWave = 8;
+    //this.enemySpawning.currentWave = 7; //8 to get a level ahead of boss
     //
 
     this.gameLoop();
@@ -55,6 +55,11 @@ class Game {
     const bossHealthInPixels =
       (this.enemies[0].health / this.enemies[0].maxHealth) * 300;
     this.bossBar.style.width = `${bossHealthInPixels}px`;
+  }
+
+  updateExperienceBar() {
+    const experienceBarInPixels = ((this.player.experience % 100) / 100) * 598;
+    this.experienceBar.style.width = `${experienceBarInPixels}px`;
   }
 
   gameLoop() {
@@ -109,6 +114,8 @@ class Game {
               //score addition and priming enemy for removal
               if (diedFromDmg) {
                 this.player.score += currentEnemy.pointsReceivedIfKilled;
+                this.player.gainExperience(currentEnemy.experienceIfKilled);
+                this.updateExperienceBar();
                 enemiesToRemove.push(currentEnemy);
               }
               //updating size of non boss enemies based on damage taken
@@ -120,7 +127,7 @@ class Game {
               }
 
               //removing bossbar if boss died
-              if (diedFromDmg && currentEnemy instanceof EnemyBoss) {
+              if (!currentEnemy instanceof EnemyBoss) {
                 this.bossBar.style.display = "none";
                 this.bossBarBorder.style.display = "none";
               }
@@ -209,7 +216,7 @@ class Game {
           this.enemies.push(new EnemyBoss(this.mainGameScreen));
         }
       }
-
+      //maybe put in method
       document.getElementById("score").innerText = this.player.score;
       document.getElementById("health").innerText = this.player.health;
       document.getElementById("wave").innerText =
@@ -219,6 +226,9 @@ class Game {
       document.getElementById("atk-speed").innerText = (
         1 / this.player.shootingCooldownInSeconds
       ).toFixed(1);
+      document.getElementById("level").innerText = this.player.level;
+      document.getElementById("skill-points-avail").innerText =
+        this.player.skillPointsAvailable;
 
       if (this.player.health <= 0) {
         this.gameState = "Lose";

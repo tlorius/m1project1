@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="icon" href="images/enemy_slime.png" type="image/x-icon" />
   </head>
@@ -22,22 +23,27 @@
     <div id="container-game">
       <div>
         <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
+        <p>Level: <span id="level">0</span></p>
         <p>Health: <span id="health">0</span></p>
         <br />
         <p>Bullet damage: <span id="bullet-dmg">0</span></p>
         <p>Attack speed: <span id="atk-speed">0</span> bullets per second</p>
+        <p>SP avail: <span id="skill-points-avail">0</span></p>
       </div>
 
       <div id="main-game-screen">
         <div id="wave-ui">Wave: <span id="wave">0</span></div>
         <div id="wave-timer"><span id="wave-time-left">0</div>
         <div id="score-ui">Score: <span id="score">0</div>
-        <div id="boss-health-bar-border">
-          <div id="boss-health-bar"></div>
-        </div>
+        <div id="boss-health-bar-border"></div>
+        <div id="boss-health-bar"></div>
+        <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
         <div id="experience-bar"></div>
       </div>
-      <div><p>controls: wasd - shoot, arrowkeys = shoot</p></div>
+      <div><p>controls: wasd - shoot, arrowkeys = shoot</p>
+      <p>Left shift = upgrade speed if you have a skillpoint</p>
+      <p>Spacebar = upgrade dmg if you have a skillpoint</p>
+    </div>
     </div>
 
     <div id="game-pause-screen">

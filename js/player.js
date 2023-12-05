@@ -15,11 +15,12 @@ class Player extends Entity {
     this.score = 0;
     this.experience = 0;
     this.level = 0;
+    this.skillPointsAvailable = 0;
     this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
-    this.health = 999;
+    this.health = 15;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
-    this.bulletDamage = 1; //allow this to be modified by powerups
+    this.bulletDamage = 1; //1 default allow this to be modified by powerups
     this.isInvincible = false;
 
     this.element.src = "images/player_down.png";
@@ -68,6 +69,48 @@ class Player extends Entity {
         this.shootingOnCooldown = false;
       }, this.shootingCooldownInSeconds * 1000);
       return true;
+    }
+  }
+  //call everytime you kill a monster
+  gainExperience(experienceGained) {
+    const newExperience = this.experience + experienceGained;
+    if (Math.floor(this.experience / 100) < Math.floor(newExperience / 100)) {
+      this.levelUp();
+      console.log("levelup called");
+    }
+    this.experience = newExperience;
+  }
+
+  levelUp() {
+    this.level += 1;
+    switch (this.level) {
+      case 1:
+      case 2:
+      case 3:
+      case 8:
+      case 13:
+      case 20:
+      case 30:
+      case 40:
+      case 50:
+        this.skillPointsAvailable += 1;
+        break;
+    }
+
+    //play sound
+  }
+
+  upgradeWeaponDmg() {
+    if (this.skillPointsAvailable > 0) {
+      this.bulletDamage += 0.5; // 0.5 extra damage per upgrade
+      this.skillPointsAvailable -= 1;
+    }
+  }
+
+  upgradeWeaponSpeed() {
+    if (this.skillPointsAvailable > 0) {
+      this.shootingCooldownInSeconds -= this.shootingCooldownInSeconds * 0.15; //15% reduction in cooldown per upgrade
+      this.skillPointsAvailable -= 1;
     }
   }
 }

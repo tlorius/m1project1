@@ -48,8 +48,13 @@ window.onload = function () {
         game.gameLoop();
       }
     }
+    if (keyDown.code === "Space") {
+      game.player.upgradeWeaponDmg();
+    }
 
-    //console.log(keyDown);
+    if (keyDown.code === "ShiftLeft") {
+      game.player.upgradeWeaponSpeed();
+    }
   });
 
   document.addEventListener("keyup", (keyUp) => {
