@@ -168,7 +168,9 @@ body {
   font-family: "Nova Square";
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  color: white;
+  color: whitesmoke;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
   position: absolute;
   z-index: 100;
 }

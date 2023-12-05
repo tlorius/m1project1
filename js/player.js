@@ -16,7 +16,7 @@ class Player extends Entity {
     this.experience = 0;
     this.level = 0;
     this.skillPointsAvailable = 0;
-    this.speed = 0.8; //experiment with this, can also be adjusted with powerups or traps
+    this.speed = 0.8; //was 0.8
     this.health = 15;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
