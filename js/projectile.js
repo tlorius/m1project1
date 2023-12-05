@@ -39,6 +39,7 @@ class Projectile extends Entity {
     this.damage = damageValue;
 
     this.element.src = "images/projectile_bullet_red.png";
-    this.setSizeAndPos();
+    this.updateSize();
+    this.setInitialPos();
   }
 }

@@ -9,6 +9,7 @@ class EnemyBoss extends Enemy {
     this.experienceIfKilled = 100;
 
     this.element.src = "images/enemy_boss.png";
-    this.setSizeAndPos();
+    this.updateSize();
+    this.setInitialPos();
   }
 }

@@ -15,9 +15,12 @@ class Entity {
     this.mainGameScreen.appendChild(this.element);
   }
 
-  setSizeAndPos() {
+  updateSize() {
     this.element.style.height = `${this.height}px`;
     this.element.style.width = `${this.width}px`;
+  }
+
+  setInitialPos() {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }

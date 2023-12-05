@@ -29,7 +29,7 @@ class Game {
 
     //testing new entities remove at the end
     //
-
+    //this.enemySpawning.currentWave = 8;
     //
 
     this.gameLoop();
@@ -92,11 +92,19 @@ class Game {
 
           for (const currentEnemy of this.enemies) {
             if (currentProjectile.didCollide(currentEnemy)) {
-              if (
-                currentEnemy.diedFromReceivedDamage(currentProjectile.damage)
-              ) {
+              const diedFromDmg = currentEnemy.diedFromReceivedDamage(
+                currentProjectile.damage
+              );
+              if (diedFromDmg) {
                 this.player.score += currentEnemy.pointsReceivedIfKilled;
                 enemiesToRemove.push(currentEnemy);
+              }
+              //updating size of non boss enemies based on damage taken
+              if (
+                (!diedFromDmg && currentEnemy instanceof EnemySlime) ||
+                (!diedFromDmg && currentEnemy instanceof EnemyBat)
+              ) {
+                currentEnemy.updateSizeBasedOnNewHealth();
               }
               currentProjectile.element.remove();
               projectileStillActive = false;

@@ -125,6 +125,11 @@ table {
 
 /* css reset above */
 
+@font-face {
+  font-family: SuperMario;
+  src: url("/m1project1/fonts/SuperMario256.ttf");
+}
+
 body {
   text-align: center;
   background-color: #202124;
@@ -160,4 +165,15 @@ body {
 
 #game-pause-screen {
   display: none;
+}
+
+.ui-element {
+  font-family: SuperMario;
+  font-size: 1rem;
+}
+
+p .ui-element {
+  position: absolute;
+  top: 0;
+  left: 600;
 }

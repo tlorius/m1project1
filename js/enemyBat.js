@@ -1,14 +1,21 @@
 class EnemyBat extends Enemy {
   constructor(mainGameScreen) {
     super(mainGameScreen);
-    this.health = 2;
-    this.height = 35;
-    this.width = 39;
+    this.health = Math.ceil(this.healthSeed * 3);
+    this.height = 22.44 + 6.28 * this.health;
+    this.width = 25 + 7 * this.health;
     this.speed = 1;
     this.pointsReceivedIfKilled = 10;
     this.experienceIfKilled = 10;
 
     this.element.src = "images/enemy_bat.png";
-    this.setSizeAndPos();
+    this.updateSize();
+    this.setInitialPos();
+  }
+
+  updateSizeBasedOnNewHealth() {
+    this.height = 22.44 + 6.28 * this.health;
+    this.width = 25 + 7 * this.health;
+    this.updateSize();
   }
 }

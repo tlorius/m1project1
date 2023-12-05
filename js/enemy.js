@@ -1,6 +1,8 @@
 class Enemy extends Entity {
   constructor(mainGameScreen) {
     super(mainGameScreen);
+    //using 2 different randomized values so enemies that have the same spawnpoint wont always have the same HP
+    this.healthSeed = Math.random();
     this.spawnSeed = Math.floor(Math.random() * 16);
     this.spawnPoints = [
       { left: -50, top: -50 },

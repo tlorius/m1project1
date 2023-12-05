@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>The lone guardian of the galaxy</title>
     <!-- Working Title, replace here and in trello once decided-->
-    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <link rel="icon" href="images/enemy_slime.png" type="image/x-icon" />
   </head>
   <body>
     <div id="game-intro-screen">
-      <img src="./images/player_down.png" alt="Intro Image" />
+      <img src="images/player_down.png" alt="Intro Image" />
       <!--Replace this image eventually-->
       <button id="btn-start-game">Start Game</button>
     </div>
@@ -20,7 +20,6 @@
       <div>
         <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
         <h2>UI</h2>
-        <p>Current Wave: <span id="wave">0</span></p>
         <p><span id="wave-time-left">0</span></p>
         <br />
         <p>Score: <span id="score">0</span></p>
@@ -30,7 +29,9 @@
         <p>Attack speed: <span id="atk-speed">0</span> bullets per second</p>
       </div>
 
-      <div id="main-game-screen"></div>
+      <div id="main-game-screen">
+        <p class="ui-element">Wave: <span id="wave">0</span></p>
+      </div>
       <div><p>controls: wasd - shoot, arrowkeys = shoot</p></div>
     </div>
 
