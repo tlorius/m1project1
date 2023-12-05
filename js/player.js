@@ -94,6 +94,7 @@ class Player extends Entity {
       case 40:
       case 50:
         this.skillPointsAvailable += 1;
+        this.speed += 0.1;
         break;
     }
 
