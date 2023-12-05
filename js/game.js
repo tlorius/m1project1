@@ -4,6 +4,9 @@ class Game {
     this.mainGameScreen = document.getElementById("main-game-screen");
     this.gameOverScreen = document.getElementById("post-game-screen");
     this.gamePauseScreen = document.getElementById("game-pause-screen");
+    this.bossBarBorder = document.getElementById("boss-health-bar-border");
+    this.bossBar = document.getElementById("boss-health-bar");
+    this.experienceBar = document.getElementById("experience-bar");
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
     this.player = null;
@@ -11,6 +14,7 @@ class Game {
     this.width = 600;
     this.enemies = [];
     this.projectiles = [];
+    this.powerUps = [];
     this.gameLoopAnimationId = null;
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
     this.isGamePaused = false;
@@ -44,6 +48,13 @@ class Game {
     this.enemies = this.enemies.filter(
       (enemy) => !enemiesToPurge.includes(enemy)
     );
+  }
+
+  updateBossBar() {
+    //bossbar total width 300px
+    const bossHealthInPixels =
+      (this.enemies[0].health / this.enemies[0].maxHealth) * 300;
+    this.bossBar.style.width = `${bossHealthInPixels}px`;
   }
 
   gameLoop() {
@@ -95,6 +106,7 @@ class Game {
               const diedFromDmg = currentEnemy.diedFromReceivedDamage(
                 currentProjectile.damage
               );
+              //score addition and priming enemy for removal
               if (diedFromDmg) {
                 this.player.score += currentEnemy.pointsReceivedIfKilled;
                 enemiesToRemove.push(currentEnemy);
@@ -105,6 +117,12 @@ class Game {
                 (!diedFromDmg && currentEnemy instanceof EnemyBat)
               ) {
                 currentEnemy.updateSizeBasedOnNewHealth();
+              }
+
+              //removing bossbar if boss died
+              if (diedFromDmg && currentEnemy instanceof EnemyBoss) {
+                this.bossBar.style.display = "none";
+                this.bossBarBorder.style.display = "none";
               }
               currentProjectile.element.remove();
               projectileStillActive = false;
@@ -117,6 +135,14 @@ class Game {
           }
         }
       }
+
+      //UPDATE BOSS BAR
+      if (this.enemies[0] instanceof EnemyBoss) {
+        this.bossBar.style.display = "block";
+        this.bossBarBorder.style.display = "block";
+        this.updateBossBar();
+      }
+      //
 
       this.purgeEnemies(enemiesToRemove);
 

@@ -170,6 +170,7 @@ body {
   letter-spacing: 0.05rem;
   color: white;
   position: absolute;
+  z-index: 100;
 }
 
 #wave-ui {
@@ -188,4 +189,30 @@ body {
   font-weight: 400;
   top: 10px;
   left: 10px;
+}
+
+#boss-health-bar-border {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 150px;
+  height: 7px;
+  width: 300px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #090a0a;
+  background-color: rgba(37, 36, 36, 0.212);
+  z-index: 98;
+}
+
+#boss-health-bar {
+  display: none;
+  position: absolute;
+  background-color: darkred;
+  height: 7px;
+  width: 300px;
+}
+
+#experience-bar {
+  display: none;
 }
