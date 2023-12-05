@@ -19,9 +19,6 @@
     <div id="container-game">
       <div>
         <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
-        <h2>UI</h2>
-        <p><span id="wave-time-left">0</span></p>
-        <br />
         <p>Score: <span id="score">0</span></p>
         <p>Health: <span id="health">0</span></p>
         <br />
@@ -30,7 +27,8 @@
       </div>
 
       <div id="main-game-screen">
-        <p class="ui-element">Wave: <span id="wave">0</span></p>
+        <div id="wave-ui">Wave: <span id="wave">0</span></div>
+        <div id="wave-timer"><span id="wave-time-left">0</div>
       </div>
       <div><p>controls: wasd - shoot, arrowkeys = shoot</p></div>
     </div>

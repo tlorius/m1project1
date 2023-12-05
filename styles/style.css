@@ -126,8 +126,8 @@ table {
 /* css reset above */
 
 @font-face {
-  font-family: SuperMario;
-  src: url("/m1project1/fonts/SuperMario256.ttf");
+  font-family: Grinched;
+  src: url("/m1project1/fonts/GrinchedRegular.otf");
 }
 
 body {
@@ -167,13 +167,22 @@ body {
   display: none;
 }
 
-.ui-element {
-  font-family: SuperMario;
-  font-size: 1rem;
+#wave-ui,
+#wave-timer {
+  font-family: Grinched;
+  font-size: 1.3rem;
+  letter-spacing: 0.05rem;
+  color: white;
+  position: absolute;
 }
 
-p .ui-element {
-  position: absolute;
-  top: 0;
-  left: 600;
+#wave-ui {
+  top: 10px;
+  left: 520px;
+}
+
+#wave-timer {
+  font-size: 1rem;
+  top: 35px;
+  left: 510px;
 }
