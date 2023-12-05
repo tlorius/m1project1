@@ -8,7 +8,7 @@ class EnemyBat extends Enemy {
     this.pointsReceivedIfKilled = 10;
     this.experienceIfKilled = 10;
 
-    this.element.src = "./images/enemy_bat.png";
+    this.element.src = "images/enemy_bat.png";
     this.setSizeAndPos();
   }
 }

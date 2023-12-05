@@ -28,13 +28,13 @@ class Player extends Entity {
 
   aim() {
     if (this.aimingLeft === 1) {
-      this.element.src = "./images/player_left.png";
+      this.element.src = "images/player_left.png";
     } else if (this.aimingLeft === -1) {
-      this.element.src = "./images/player_right.png";
+      this.element.src = "images/player_right.png";
     } else if (this.aimingUp === 1) {
-      this.element.src = "./images/player_up.png";
+      this.element.src = "images/player_up.png";
     } else if (this.aimingUp === -1) {
-      this.element.src = "./images/player_down.png";
+      this.element.src = "images/player_down.png";
     }
   }
 

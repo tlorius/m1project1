@@ -8,7 +8,7 @@ class EnemySlime extends Enemy {
     this.pointsReceivedIfKilled = 10;
     this.experienceIfKilled = 5;
 
-    this.element.src = "./images/enemy_slime.png";
+    this.element.src = "images/enemy_slime.png";
     this.setSizeAndPos();
   }
 }
