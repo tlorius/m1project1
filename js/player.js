@@ -18,7 +18,7 @@ class Player extends Entity {
     this.level = 0;
     this.skillPointsAvailable = 0;
     this.speed = 0.8; //was 0.8
-    this.health = 15;
+    this.health = 10;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
     this.powerUpOnCooldown = false;
@@ -115,8 +115,6 @@ class Player extends Entity {
         this.speed += 0.05;
         break;
     }
-
-    //play sound
   }
 
   upgradeWeaponDmg() {
@@ -148,5 +146,17 @@ class Player extends Entity {
   consumedStarPowerUp(currentTime) {
     this.timeWhenStarConsumed = currentTime;
     this.isInvincible = true;
+  }
+
+  takeDamageImage() {
+    if (this.aimingLeft === 1) {
+      this.element.src = "images/player_left_hurt.png";
+    } else if (this.aimingLeft === -1) {
+      this.element.src = "images/player_right_hurt.png";
+    } else if (this.aimingUp === 1) {
+      this.element.src = "images/player_up_hurt.png";
+    } else if (this.aimingUp === -1) {
+      this.element.src = "images/player_down_hurt.png";
+    }
   }
 }

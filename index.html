@@ -21,20 +21,15 @@
     </div>
 
     <div id="container-game">
-      <div>
-        <!-- Put UI elements that are outside of the main game screen here, make sure they are hidden too if desired-->
-        <p>Level: <span id="level">0</span></p>
-        <p>Health: <span id="health">0</span></p>
-        <br />
-        <p>Bullet damage: <span id="bullet-dmg">0</span></p>
-        <p>Attack speed: <span id="atk-speed">0</span> bullets per second</p>
-        <p>SkillPoints avail: <span id="skill-points-avail">0</span></p>
-      </div>
-
       <div id="main-game-screen">
+        <div id="level-ui">Level: <span id="level">0</span></div>
+        <div id="health-ui"><img src="images/ui_heart.png" alt="heart_icon"> <span id="health">0</span></div>
         <div id="wave-ui">Wave: <span id="wave">0</span></div>
         <div id="wave-timer"><span id="wave-time-left">0</div>
         <div id="score-ui">Score: <span id="score">0</div>
+        <div id="bullet-dmg-ui"><img src="images/gun_icon.png" alt="icon_gun"> <span id="bullet-dmg">0</span></div>
+        <div id="attack-speed-ui"><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> <span id="atk-speed">0</span></div>
+        <div id="skillpoints-ui"><img src="images/skillpoints.png" alt="icon_skillpoints"> <span id="skill-points-avail">0</span></div>
         <div id="boss-health-bar-border"></div>
         <div id="boss-health-bar"></div>
         <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
@@ -42,11 +37,14 @@
         <audio id ="invincible-sound" src="audio/invincible.m4a" type="audio/m4a"></audio>
         <audio id="damage-taken-sound" src="audio/mixkit-small-hit-in-a-game-2072.wav"></audio>
         <audio id="levelup-sound" src="audio/lvlup.m4a"></audio>
+        <audio id="main_menu_sound" src="audio/main menu.m4a"></audio>
+        <audio id="gameplay-background-sound" src="audio/default_background_music.m4a"></audio>
+        <audio id="boss-sound" src="audio/boss_music.m4a"></audio>
       </div>
-      <div><p>controls: wasd - move, arrowkeys = shoot</p>
-      <p>Left shift = upgrade attack speed if you have a skillpoint</p>
-      <p>Spacebar = upgrade dmg if you have a skillpoint</p>
-      <p>Might behave weird on 60hz instead of 120+</p>
+      <div id="tooltips-ui"><p>controls: wasd - move, arrowkeys = shoot</p>
+      <p><img src="images/skillpoints.png" alt="icon_skillpoints"> - Available Skillpoints to Level Up either Bullet Damage or Attack speed</p>
+      <p><img src="images/gun_icon.png" alt="icon_gun"> - Current Bullet Damage - To level up press: SPACEBAR</p>
+      <p><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> - Current Gun Attack Speed - To level up press: left shift</p>
     </div>
     </div>
 
@@ -56,7 +54,7 @@
 
     <div id="post-game-screen">
       <h2>Game over placeholder</h2>
-      <p>Final Score=<span id="score-post-game">0</span></p>
+      <p>Final Score= <span id="score-post-game">0</span></p>
       <button id="btn-restart-game">Restart</button>
     </div>
 

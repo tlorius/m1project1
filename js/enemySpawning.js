@@ -103,7 +103,9 @@ class EnemySpawning {
       this.currentWave += 1;
       this.isWaveActive = true;
       this.currentWaveStartTime = currentTime;
+      return true;
     }
+    return false;
   }
 
   endWave(currentTime) {

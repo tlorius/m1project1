@@ -15,6 +15,8 @@ class Game {
     this.invincibleSound = document.getElementById("invincible-sound");
     this.playerReceiveDamageSound =
       document.getElementById("damage-taken-sound");
+    this.gameplayMusic = document.getElementById("gameplay-background-sound");
+    this.bossMusic = document.getElementById("boss-sound");
 
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
@@ -39,6 +41,7 @@ class Game {
     this.mainGameScreen.style.width = `${this.width}px`;
 
     this.player = new Player(this.mainGameScreen);
+    this.playSound(this.gameplayMusic, 0.04);
 
     //testing new entities remove at the end
     //
@@ -160,6 +163,9 @@ class Game {
                 currentEnemy.updateSizeBasedOnNewHealth();
               }
 
+              if (diedFromDmg && currentEnemy instanceof EnemyBoss) {
+                this.gameState = "Win";
+              }
               //removing bossbar if boss died
               if (!currentEnemy instanceof EnemyBoss) {
                 this.bossBar.style.display = "none";
@@ -213,6 +219,7 @@ class Game {
           } else {
             if (!this.player.isInvincible) {
               this.player.health -= 1;
+              this.player.takeDamageImage();
               this.playSound(this.playerReceiveDamageSound, 0.05, 1000);
             } else {
               this.player.score += currentEnemy.pointsReceivedIfKilled;
@@ -227,7 +234,14 @@ class Game {
 
       //Wave spawning logic, majority of the calculations handled inside enemySpawning instance
       const currentTime = performance.now();
-      this.enemySpawning.startNewWave(currentTime);
+      //returns true if new wave can start -> using to initialize boss music
+      if (
+        this.enemySpawning.startNewWave(currentTime) &&
+        this.enemySpawning.currentWave === 10
+      ) {
+        this.playSound(this.bossMusic, 0.05);
+        this.stopSound(this.gameplayMusic);
+      }
       this.enemySpawning.endWave(currentTime);
 
       const timeLeftInWave = parseInt(
@@ -276,6 +290,7 @@ class Game {
           } else {
             this.player.consumedStarPowerUp(currentTime);
             this.playSound(this.invincibleSound, 0.05, 10000);
+            this.gameplayMusic.pause();
           }
         }
       });
@@ -284,6 +299,7 @@ class Game {
 
       //star powerup timer check
       if (currentTime - this.player.timeWhenStarConsumed > 10000) {
+        this.gameplayMusic.play();
         this.player.isInvincible = false;
       }
 
@@ -310,7 +326,10 @@ class Game {
         this.mainGameScreen.style.display = "none";
         this.gameOverScreen.style.display = "block";
         this.player.element.remove();
-        console.log("game over");
+        this.stopSound(this.gameplayMusic);
+        this.stopSound(this.bossMusic);
+        document.getElementById("score-post-game").innerText =
+          this.player.score;
       } else {
         this.gameLoopAnimationId = requestAnimationFrame(() => this.gameLoop());
       }

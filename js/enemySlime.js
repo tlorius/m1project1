@@ -6,7 +6,7 @@ class EnemySlime extends Enemy {
     this.width = 10 + 7.5 * this.health;
     this.speed = 0.4;
     this.pointsReceivedIfKilled = 100 + 50 * this.health;
-    this.experienceIfKilled = 5;
+    this.experienceIfKilled = 5 + this.health;
 
     this.element.src = "images/enemy_slime.png";
     this.updateSize();

@@ -164,9 +164,14 @@ body {
 
 #wave-ui,
 #wave-timer,
-#score-ui {
+#score-ui,
+#level-ui,
+#health-ui,
+#bullet-dmg-ui,
+#attack-speed-ui,
+#skillpoints-ui {
   font-family: "Nova Square";
-  font-size: 1rem;
+  font-size: 1.3rem;
   letter-spacing: 0.05rem;
   color: whitesmoke;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
@@ -175,22 +180,72 @@ body {
   z-index: 100;
 }
 
+#skillpoints-ui {
+  top: 500px;
+  left: 520px;
+}
+#skillpoints-ui img {
+  height: 25px;
+}
+
+#bullet-dmg-ui {
+  top: 580px;
+  left: 520px;
+}
+
+#bullet-dmg-ui img {
+  height: 25px;
+}
+
+#attack-speed-ui {
+  top: 540px;
+  left: 520px;
+}
+
+#attack-speed-ui img {
+  height: 25px;
+}
+
 #wave-ui {
-  top: 10px;
-  left: 500px;
+  top: 30px;
+  left: 10px;
 }
 
 #wave-timer {
-  font-size: 1rem;
-  top: 30px;
-  left: 500px;
+  top: 12px;
+  left: 400px;
 }
 
 #score-ui {
-  font-size: 1rem;
   font-weight: 400;
   top: 10px;
   left: 10px;
+}
+
+#level-ui {
+  font-size: 1rem;
+  top: 610px;
+  left: 10px;
+}
+
+#health-ui {
+  font-size: 1 rem;
+  top: 580px;
+  left: 10px;
+  color: #ca323e;
+}
+#health-ui img {
+  width: 16px;
+  height: 15px;
+}
+
+#tooltips-ui p {
+  line-height: 2rem;
+  font-size: 1.5rem;
+}
+
+#tooltips-ui p img {
+  height: 25px;
 }
 
 #boss-health-bar-border {
