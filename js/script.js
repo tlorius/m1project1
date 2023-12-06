@@ -2,10 +2,17 @@ window.onload = function () {
   const startGameBtn = document.getElementById("btn-start-game");
   const restartGameBtn = document.getElementById("btn-restart-game");
   let game;
+  let firstClick = true;
   const mainMenuMusic = document.getElementById("main_menu_sound");
 
   //had to add eventlistener as player has to interact with site before playing sound
-  document.addEventListener("click", () => mainMenuMusic.play());
+  //variable to prevent this music from playing again once we click into the game
+  document.addEventListener("click", () => {
+    if (firstClick) {
+      mainMenuMusic.play();
+      firstClick = false;
+    }
+  });
 
   mainMenuMusic.volume = 0.05;
 
@@ -16,6 +23,7 @@ window.onload = function () {
 
   startGameBtn.addEventListener("click", () => {
     mainMenuMusic.pause();
+    mainMenuMusic.currentTime = 0;
     startNewGame();
   });
   restartGameBtn.addEventListener("click", () => location.reload());

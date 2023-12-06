@@ -24,7 +24,7 @@ class Player extends Entity {
     this.powerUpOnCooldown = false;
     this.powerUpCooldownInSeconds = 30;
     this.bulletDamage = 1; //1 default allow this to be modified by powerups
-    this.isInvincible = true;
+    this.isInvincible = false;
     this.timeWhenStarConsumed;
 
     this.element.src = "images/player_down.png";
