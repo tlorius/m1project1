@@ -5,6 +5,11 @@ window.onload = function () {
   let firstClick = true;
   const mainMenuMusic = document.getElementById("main_menu_sound");
 
+  function stopMainMenuMusic() {
+    mainMenuMusic.pause();
+    mainMenuMusic.currentTime = 0;
+  }
+
   //had to add eventlistener as player has to interact with site before playing sound
   //variable to prevent this music from playing again once we click into the game
   document.addEventListener("click", () => {
@@ -22,8 +27,7 @@ window.onload = function () {
   }
 
   startGameBtn.addEventListener("click", () => {
-    mainMenuMusic.pause();
-    mainMenuMusic.currentTime = 0;
+    stopMainMenuMusic();
     startNewGame();
   });
   restartGameBtn.addEventListener("click", () => location.reload());
@@ -58,7 +62,6 @@ window.onload = function () {
     }
     if (keyDown.code === "Escape") {
       game.isGamePaused = !game.isGamePaused;
-      console.log(game.isGamePaused);
       if (!game.isGamePaused) {
         game.gamePauseScreen.style.display = "none";
         game.mainGameScreen.style.display = "block";

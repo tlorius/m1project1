@@ -17,6 +17,7 @@ class Game {
       document.getElementById("damage-taken-sound");
     this.gameplayMusic = document.getElementById("gameplay-background-sound");
     this.bossMusic = document.getElementById("boss-sound");
+    this.mainMenuMusic = document.getElementById("main_menu_sound");
 
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
@@ -31,26 +32,6 @@ class Game {
     this.isGamePaused = false;
   }
 
-  startGame() {
-    this.introScreen.style.display = "none";
-    this.gameOverScreen.style.display = "none";
-    this.gamePauseScreen.style.display = "none";
-    this.mainGameScreen.style.display = "block";
-
-    this.mainGameScreen.style.height = `${this.height}px`;
-    this.mainGameScreen.style.width = `${this.width}px`;
-
-    this.player = new Player(this.mainGameScreen);
-    this.playSound(this.gameplayMusic, 0.04);
-
-    //testing new entities remove at the end
-    //
-    //this.enemySpawning.currentWave = 8; //8 to get a level ahead of boss
-    //
-
-    this.gameLoop();
-  }
-
   stopSound(audioElement) {
     audioElement.pause();
     audioElement.currentTime = 0;
@@ -63,6 +44,28 @@ class Game {
     if (duration) {
       setTimeout(() => this.stopSound(audioElement), duration);
     }
+  }
+
+  startGame() {
+    this.introScreen.style.display = "none";
+    this.gameOverScreen.style.display = "none";
+    this.gamePauseScreen.style.display = "none";
+    this.mainGameScreen.style.display = "block";
+
+    this.mainGameScreen.style.height = `${this.height}px`;
+    this.mainGameScreen.style.width = `${this.width}px`;
+
+    this.player = new Player(this.mainGameScreen);
+    this.playSound(this.gameplayMusic, 0.04); //0.04
+    //removing this as the music wouldnt stop playing otherwise
+    this.mainMenuMusic.remove();
+
+    //testing new entities remove at the end
+    //
+    //this.enemySpawning.currentWave = 8; //8 to get a level ahead of boss
+    //
+
+    this.gameLoop();
   }
 
   // Remove enemies from dom and array
@@ -239,8 +242,10 @@ class Game {
         this.enemySpawning.startNewWave(currentTime) &&
         this.enemySpawning.currentWave === 10
       ) {
-        this.playSound(this.bossMusic, 0.05);
+        //if still overlap, just do gameplayMusic
+        this.gameplayMusic.volume = 0;
         this.stopSound(this.gameplayMusic);
+        this.playSound(this.bossMusic, 0.05);
       }
       this.enemySpawning.endWave(currentTime);
 
