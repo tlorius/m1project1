@@ -1,12 +1,19 @@
 class Game {
   constructor() {
+    //screens
     this.introScreen = document.getElementById("game-intro-screen");
     this.mainGameScreen = document.getElementById("main-game-screen");
     this.gameOverScreen = document.getElementById("post-game-screen");
     this.gamePauseScreen = document.getElementById("game-pause-screen");
+
+    //on screen elements
     this.bossBarBorder = document.getElementById("boss-health-bar-border");
     this.bossBar = document.getElementById("boss-health-bar");
     this.experienceBar = document.getElementById("experience-bar");
+
+    //audio elements
+    this.invincibleSound = document.getElementById("invincible-sound");
+
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
     this.player = null;
@@ -31,12 +38,28 @@ class Game {
 
     this.player = new Player(this.mainGameScreen);
 
+    this.playSound(this.invincibleSound, 0.05, 3000);
+
     //testing new entities remove at the end
     //
-    //this.enemySpawning.currentWave = 7; //8 to get a level ahead of boss
+    //this.enemySpawning.currentWave = 8; //8 to get a level ahead of boss
     //
 
     this.gameLoop();
+  }
+
+  stopSound(audioElement) {
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
+
+  playSound(audioElement, volume, duration) {
+    audioElement.volume = volume;
+    audioElement.play();
+
+    if (duration) {
+      setTimeout(() => this.stopSound(audioElement), duration);
+    }
   }
 
   // Remove enemies from dom and array
@@ -67,7 +90,6 @@ class Game {
     if (this.isGamePaused) {
       this.gamePauseScreen.style.display = "block";
       this.mainGameScreen.style.display = "none";
-      console.log("game is paused.");
       //prevents gameloop from running until unpaused
     } else {
       this.player.move();
@@ -82,7 +104,8 @@ class Game {
             this.player.top,
             this.player.aimingUp,
             this.player.aimingLeft,
-            this.player.bulletDamage
+            this.player.bulletDamage,
+            this.player.isInvincible
           )
         );
       }
@@ -181,6 +204,8 @@ class Game {
               this.player.health -= 1;
             } else {
               this.player.score += currentEnemy.pointsReceivedIfKilled;
+              this.player.gainExperience(currentEnemy.experienceIfKilled);
+              this.updateExperienceBar();
             }
           }
         }

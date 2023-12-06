@@ -5,7 +5,8 @@ class Projectile extends Entity {
     playerTop,
     aimingUp,
     aimingLeft,
-    damageValue
+    damageValue,
+    isPlayerInvincible
   ) {
     super(mainGameScreen);
 
@@ -38,7 +39,18 @@ class Projectile extends Entity {
     this.width = 10;
     this.damage = damageValue;
 
-    this.element.src = "images/projectile_bullet_red.png";
+    this.element.src =
+      this.damage > 1.5
+        ? "images/projectile_bullet_yellow.png"
+        : "images/projectile_bullet_green.png";
+
+    this.element.src =
+      this.damage > 2.5 ? "images/projectile_bullet_red.png" : this.element.src;
+
+    this.element.src = isPlayerInvincible
+      ? "images/projectile_rgb_easteregg.gif"
+      : this.element.src;
+
     this.updateSize();
     this.setInitialPos();
   }

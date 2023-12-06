@@ -21,7 +21,7 @@ class Player extends Entity {
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
     this.bulletDamage = 1; //1 default allow this to be modified by powerups
-    this.isInvincible = false;
+    this.isInvincible = true;
 
     this.element.src = "images/player_down.png";
     this.updateSize();
@@ -29,14 +29,23 @@ class Player extends Entity {
   }
 
   aim() {
+    //if statement with incinvible effect
     if (this.aimingLeft === 1) {
-      this.element.src = "images/player_left.png";
+      this.element.src = this.isInvincible
+        ? "images/player_left_invincible.gif"
+        : "images/player_left.png";
     } else if (this.aimingLeft === -1) {
-      this.element.src = "images/player_right.png";
+      this.element.src = this.isInvincible
+        ? "images/player_right_invincible.gif"
+        : "images/player_right.png";
     } else if (this.aimingUp === 1) {
-      this.element.src = "images/player_up.png";
+      this.element.src = this.isInvincible
+        ? "images/player_up_invincible.gif"
+        : "images/player_up.png";
     } else if (this.aimingUp === -1) {
-      this.element.src = "images/player_down.png";
+      this.element.src = this.isInvincible
+        ? "images/player_down_invincible.gif"
+        : "images/player_down.png";
     }
   }
 

@@ -3,17 +3,14 @@ class Powerup extends Entity {
     super(mainGameScreen);
     this.top = 0;
     this.left = 0;
+    this.timeCreated = performance.now();
   }
 
   makeStar() {}
 
   makeHealthPack() {}
 
-  makeRandomEffect() {}
-
   consumedStar() {}
 
   consumedHealthPack() {}
-
-  consumedRandomEffect() {}
 }
