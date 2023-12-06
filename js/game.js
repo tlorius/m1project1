@@ -13,6 +13,8 @@ class Game {
 
     //audio elements
     this.invincibleSound = document.getElementById("invincible-sound");
+    this.playerReceiveDamageSound =
+      document.getElementById("damage-taken-sound");
 
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
@@ -37,8 +39,6 @@ class Game {
     this.mainGameScreen.style.width = `${this.width}px`;
 
     this.player = new Player(this.mainGameScreen);
-
-    this.playSound(this.invincibleSound, 0.05, 3000);
 
     //testing new entities remove at the end
     //
@@ -70,6 +70,17 @@ class Game {
 
     this.enemies = this.enemies.filter(
       (enemy) => !enemiesToPurge.includes(enemy)
+    );
+  }
+
+  // Remove powerUps from dom and array
+  purgePowerUps(powerUpsToPurge) {
+    powerUpsToPurge.forEach((powerUpToRemove) => {
+      powerUpToRemove.element.remove();
+    });
+
+    this.powerUps = this.powerUps.filter(
+      (powerUp) => !powerUpsToPurge.includes(powerUp)
     );
   }
 
@@ -178,7 +189,7 @@ class Game {
 
       this.projectiles = remainingProjectiles;
 
-      //TO BE ADDED: enemy collision with player logic
+      //enemy collision with player logic
 
       const enemiesToRemoveAfterPlayerCollision = [];
       this.enemies.forEach((currentEnemy) => {
@@ -202,6 +213,7 @@ class Game {
           } else {
             if (!this.player.isInvincible) {
               this.player.health -= 1;
+              this.playSound(this.playerReceiveDamageSound, 0.05, 1000);
             } else {
               this.player.score += currentEnemy.pointsReceivedIfKilled;
               this.player.gainExperience(currentEnemy.experienceIfKilled);
@@ -229,7 +241,7 @@ class Game {
           "wave-time-left"
         ).innerText = `Time left in Wave: ${timeLeftInWave}s`;
       }
-
+      //individual monster spawning logic
       if (this.enemySpawning.canEnemySpawn(currentTime)) {
         const enemyClassToSpawn =
           this.enemySpawning.randomizeSpawn(currentTime);
@@ -241,6 +253,40 @@ class Game {
           this.enemies.push(new EnemyBoss(this.mainGameScreen));
         }
       }
+      //powerup spawning chance logic
+      if (Math.random() > 0.9993 && this.player.canPowerUpSpawn()) {
+        this.powerUps.push(new Powerup(this.mainGameScreen));
+        const newPowerUp = this.powerUps[this.powerUps.length - 1];
+        if (newPowerUp.typeRandomizer === "star") {
+          newPowerUp.makeStar();
+        } else {
+          newPowerUp.makeHealthPack();
+        }
+      }
+      //logic to remove powerups if consumed or are left for 15s
+
+      const powerUpsToRemove = [];
+      this.powerUps.forEach((currentPowerUp) => {
+        if (currentTime - currentPowerUp.timeCreated > 15000) {
+          powerUpsToRemove.push(currentPowerUp);
+        } else if (currentPowerUp.didCollide(this.player)) {
+          powerUpsToRemove.push(currentPowerUp);
+          if (currentPowerUp.typeRandomizer === "healthpack") {
+            this.player.health += 5;
+          } else {
+            this.player.consumedStarPowerUp(currentTime);
+            this.playSound(this.invincibleSound, 0.05, 10000);
+          }
+        }
+      });
+
+      this.purgePowerUps(powerUpsToRemove);
+
+      //star powerup timer check
+      if (currentTime - this.player.timeWhenStarConsumed > 10000) {
+        this.player.isInvincible = false;
+      }
+
       //maybe put in method
       document.getElementById("score").innerText = this.player.score;
       document.getElementById("health").innerText = this.player.health;

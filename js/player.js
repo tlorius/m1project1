@@ -1,6 +1,7 @@
 class Player extends Entity {
   constructor(mainGameScreen) {
     super(mainGameScreen);
+    this.levelUpSound = document.getElementById("levelup-sound");
     //base properties
     this.left = 285;
     this.top = 280;
@@ -20,8 +21,11 @@ class Player extends Entity {
     this.health = 15;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
+    this.powerUpOnCooldown = false;
+    this.powerUpCooldownInSeconds = 30;
     this.bulletDamage = 1; //1 default allow this to be modified by powerups
-    this.isInvincible = true;
+    this.isInvincible = false;
+    this.timeWhenStarConsumed;
 
     this.element.src = "images/player_down.png";
     this.updateSize();
@@ -85,12 +89,12 @@ class Player extends Entity {
     const newExperience = this.experience + experienceGained;
     if (Math.floor(this.experience / 100) < Math.floor(newExperience / 100)) {
       this.levelUp();
-      console.log("levelup called");
     }
     this.experience = newExperience;
   }
 
   levelUp() {
+    this.playSound(this.levelUpSound, 0.05, 500);
     this.level += 1;
     switch (this.level) {
       case 1:
@@ -127,5 +131,22 @@ class Player extends Entity {
       this.shootingCooldownInSeconds -= this.shootingCooldownInSeconds * 0.15; //15% reduction in cooldown per upgrade
       this.skillPointsAvailable -= 1;
     }
+  }
+
+  canPowerUpSpawn() {
+    if (this.powerUpOnCooldown) {
+      return false;
+    } else {
+      this.powerUpOnCooldown = true;
+      setTimeout(() => {
+        this.powerUpOnCooldown = false;
+      }, this.powerUpCooldownInSeconds * 1000);
+      return true;
+    }
+  }
+
+  consumedStarPowerUp(currentTime) {
+    this.timeWhenStarConsumed = currentTime;
+    this.isInvincible = true;
   }
 }

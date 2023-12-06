@@ -49,4 +49,18 @@ class Entity {
       return false;
     }
   }
+
+  stopSound(audioElement) {
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
+
+  playSound(audioElement, volume, duration) {
+    audioElement.volume = volume;
+    audioElement.play();
+
+    if (duration) {
+      setTimeout(() => this.stopSound(audioElement), duration);
+    }
+  }
 }
