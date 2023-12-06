@@ -286,7 +286,7 @@ class Game {
         } else if (currentPowerUp.didCollide(this.player)) {
           powerUpsToRemove.push(currentPowerUp);
           if (currentPowerUp.typeRandomizer === "healthpack") {
-            this.player.health += 5;
+            this.player.health += 3;
           } else {
             this.player.consumedStarPowerUp(currentTime);
             this.playSound(this.invincibleSound, 0.05, 10000);

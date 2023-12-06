@@ -2,13 +2,22 @@ window.onload = function () {
   const startGameBtn = document.getElementById("btn-start-game");
   const restartGameBtn = document.getElementById("btn-restart-game");
   let game;
+  const mainMenuMusic = document.getElementById("main_menu_sound");
+
+  //had to add eventlistener as player has to interact with site before playing sound
+  document.addEventListener("click", () => mainMenuMusic.play());
+
+  mainMenuMusic.volume = 0.05;
 
   function startNewGame() {
     game = new Game();
     game.startGame();
   }
 
-  startGameBtn.addEventListener("click", () => startNewGame());
+  startGameBtn.addEventListener("click", () => {
+    mainMenuMusic.pause();
+    startNewGame();
+  });
   restartGameBtn.addEventListener("click", () => location.reload());
 
   document.addEventListener("keydown", (keyDown) => {

@@ -207,36 +207,36 @@ body {
 }
 
 #wave-ui {
-  top: 30px;
-  left: 10px;
+  top: 12px;
+  left: 230px;
 }
 
 #wave-timer {
-  top: 12px;
-  left: 400px;
+  top: 32px;
+  left: 160px;
 }
 
 #score-ui {
   font-weight: 400;
   top: 10px;
-  left: 10px;
+  left: 430px;
 }
 
 #level-ui {
   font-size: 1rem;
-  top: 610px;
-  left: 10px;
+  top: 623px;
+  left: 250px;
 }
 
 #health-ui {
-  font-size: 1 rem;
-  top: 580px;
+  font-size: 1.5rem;
+  top: 10px;
   left: 10px;
   color: #ca323e;
 }
 #health-ui img {
-  width: 16px;
-  height: 15px;
+  width: 21px;
+  height: 20px;
 }
 
 #tooltips-ui p {
@@ -275,7 +275,7 @@ body {
 
 #experience-bar {
   position: absolute;
-  top: 632px;
+  top: 622px;
   left: 2px;
   background: rgb(252, 87, 87);
   background: linear-gradient(
@@ -284,7 +284,7 @@ body {
     rgba(239, 249, 87, 1) 50%,
     rgba(138, 250, 149, 1) 100%
   );
-  height: 7px;
+  height: 16px;
   width: 0px;
   z-index: 99;
 }
@@ -296,9 +296,9 @@ body {
 
   letter-spacing: 1.6rem;
   position: absolute;
-  top: 630px;
+  top: 620px;
   left: 0px;
-  height: 7px;
+  height: 16px;
   width: 599px;
   border-width: 2px;
   border-style: solid;

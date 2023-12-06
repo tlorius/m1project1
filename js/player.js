@@ -18,13 +18,13 @@ class Player extends Entity {
     this.level = 0;
     this.skillPointsAvailable = 0;
     this.speed = 0.8; //was 0.8
-    this.health = 10;
+    this.health = 5;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
     this.powerUpOnCooldown = false;
     this.powerUpCooldownInSeconds = 30;
     this.bulletDamage = 1; //1 default allow this to be modified by powerups
-    this.isInvincible = false;
+    this.isInvincible = true;
     this.timeWhenStarConsumed;
 
     this.element.src = "images/player_down.png";
@@ -102,14 +102,14 @@ class Player extends Entity {
       case 3:
       case 4:
       case 5:
-      case 6:
-      case 7:
-      case 8:
-      case 9:
       case 10:
+      case 15:
       case 20:
+      case 25:
       case 30:
+      case 35:
       case 40:
+      case 45:
       case 50:
         this.skillPointsAvailable += 1;
         this.speed += 0.05;
