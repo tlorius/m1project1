@@ -2,20 +2,6 @@ class Settings {
   constructor(gamePauseScreen) {
     this.gamePauseScreen = gamePauseScreen;
     this.restoreDefaultKeybinds();
-    // this.keybindMoveUp = "KeyW";
-    // this.keybindMoveDown = "KeyS";
-    // this.keybindMoveLeft = "KeyA";
-    // this.keybindMoveRight = "KeyD";
-    // this.keybindAimUp = "ArrowUp";
-    // this.keybindAimDown = "ArrowDown";
-    // this.keybindAimLeft = "ArrowLeft";
-    // this.keybindAimRight = "ArrowRight";
-    // this.keybindLevelUpDmg = "KeyE"; //spacebar probably
-    // this.keybindLevelUpAtkSpeed = "KeyQ"; //shift or control probably
-
-    //features to be potentially added
-    // this.volume = 1;
-    // this.muted = false;
   }
 
   isKeyAlreadyAssigned(keyCode) {
@@ -45,7 +31,7 @@ class Settings {
     this.keybindAimDown = "ArrowDown";
     this.keybindAimLeft = "ArrowLeft";
     this.keybindAimRight = "ArrowRight";
-    this.keybindLevelUpDmg = "KeyE";
-    this.keybindLevelUpAtkSpeed = "KeyQ";
+    this.keybindLevelUpDmg = "Space";
+    this.keybindLevelUpAtkSpeed = "ShiftLeft";
   }
 }

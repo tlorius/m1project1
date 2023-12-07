@@ -5,11 +5,13 @@ class Game {
     this.mainGameScreen = document.getElementById("main-game-screen");
     this.gameOverScreen = document.getElementById("post-game-screen");
     this.gamePauseScreen = document.getElementById("game-pause-screen");
+    this.highscoreScreen = document.getElementById("highscore-screen");
 
     //on screen elements
     this.bossBarBorder = document.getElementById("boss-health-bar-border");
     this.bossBar = document.getElementById("boss-health-bar");
     this.experienceBar = document.getElementById("experience-bar");
+    this.highscoreList = document.getElementById("highscore-list");
 
     //audio elements
     this.invincibleSound = document.getElementById("invincible-sound");
@@ -30,8 +32,48 @@ class Game {
     this.gameLoopAnimationId = null;
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
     this.isGamePaused = false;
+    this.highscores = [];
+    this.currentPlayerHighscoreName = "";
     //if this is true, modify start wave to 8,  give player 15 skill points and set level to 51
     this.demoModeActive = false;
+  }
+
+  sortHighscoresAndReturnTopTen(scoreArray) {
+    return scoreArray.sort((a, b) => b.score - a.score).slice(0, 10);
+  }
+
+  getHighscores() {
+    //check if there already is a local storage, otherwise just return the existing highscores value
+    if (localStorage.getItem("highscores") === null) {
+      return (this.highscores = [
+        { name: "Abinity", score: 1337 },
+        { name: "Tom", score: 3600 },
+        { name: "T33kanne", score: 9001 },
+      ]);
+    } else {
+      let retrievedHighscores = JSON.parse(localStorage.getItem("highscores"));
+      retrievedHighscores.forEach((score) => this.highscores.push(score));
+      this.highscores = this.sortHighscoresAndReturnTopTen(this.highscores);
+    }
+  }
+
+  //this gets called in script once player inputs name
+  saveHighscoresAndDisplayList() {
+    this.highscores.push({
+      name: this.currentPlayerHighscoreName,
+      score: this.player.score,
+    });
+    this.highscores = this.sortHighscoresAndReturnTopTen(this.highscores);
+    localStorage.setItem("highscores", JSON.stringify(this.highscores));
+
+    //displaying all 10 elements in ol on endgamescreen
+    this.highscoreScreen.style.display = "block";
+
+    this.highscores.forEach((highscoreObj) => {
+      const currentScoreElement = document.createElement("li");
+      currentScoreElement.innerText = `${highscoreObj.name} - ${highscoreObj.score}`;
+      this.highscoreList.appendChild(currentScoreElement);
+    });
   }
 
   stopSound(audioElement) {
@@ -337,6 +379,7 @@ class Game {
 
       if (this.gameState === "Win" || this.gameState === "Lose") {
         //Code for won game or lost game, can replace with second if else statement if needed to separate
+        this.getHighscores();
         this.mainGameScreen.style.display = "none";
         this.gameOverScreen.style.display = "block";
         this.player.element.remove();

@@ -32,13 +32,15 @@
         <div id="wave-ui">Wave: <span id="wave">0</span></div>
         <div id="wave-timer"><span id="wave-time-left">0</div>
         <div id="score-ui">Score: <span id="score">0</div>
-          <div id="skillpoints-ui"><img src="images/skillpoints.png" alt="icon_skillpoints"> <span id="skill-points-avail">0</span></div>
+        <div id="skillpoints-ui"><img src="images/skillpoints.png" alt="icon_skillpoints"> <span id="skill-points-avail">0</span></div>
         <div id="bullet-dmg-ui"><img src="images/gun_icon.png" alt="icon_gun"> <span id="bullet-dmg">0</span></div>
         <div id="attack-speed-ui"><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> <span id="atk-speed">0</span></div>
         <div id="boss-health-bar-border"></div>
         <div id="boss-health-bar"></div>
         <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
         <div id="experience-bar"></div>
+
+
         <audio id ="invincible-sound" src="audio/invincible.m4a" type="audio/m4a"></audio>
         <audio id="damage-taken-sound" src="audio/mixkit-small-hit-in-a-game-2072.wav"></audio>
         <audio id="levelup-sound" src="audio/lvlup.m4a"></audio>
@@ -46,6 +48,8 @@
         <audio id="gameplay-background-sound" src="audio/default_background_music.m4a"></audio>
         <audio id="boss-sound" src="audio/boss_music.m4a"></audio>
       </div>
+
+
       <div id="tooltips-ui"><p>controls: wasd - move, arrowkeys = shoot</p>
       <p><img src="images/skillpoints.png" alt="icon_skillpoints"> - Available Skillpoints to Level Up either Bullet Damage or Attack speed</p>
       <p><img src="images/gun_icon.png" alt="icon_gun"> - Current Bullet Damage - To level up press: SPACEBAR</p>
@@ -54,18 +58,20 @@
     </div>
 
     <div id="game-pause-screen">
-      <h2>Testing Pausing</h2>
+      <h2>Paused... but your timer is still running</h2>
     </div>
 
     <div id="post-game-screen">
       <h2>Game over placeholder</h2>
       <p>Final Score= <span id="score-post-game">0</span></p>
+      <input type="text" id="score-name" placeholder="Enter your name to save your highscore and confirm with Enter!">
+      <p>You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <button id="btn-restart-game">Restart</button>
-    </div>
 
-    <div id="highscore-screen">
-      <h2>highscores</h2>
-      <p>1. xdd</p>
+      <div id="highscore-screen">
+        <h2>Highscores</h2>
+        <ol id="highscore-list"></ol>
+      </div>
     </div>
 
 

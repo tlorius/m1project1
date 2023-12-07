@@ -3,6 +3,7 @@ window.onload = function () {
   const restartGameBtn = document.getElementById("btn-restart-game");
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
+  const nameHighscoreInput = document.getElementById("score-name");
 
   let game;
   let firstClick = true;
@@ -13,6 +14,18 @@ window.onload = function () {
     mainMenuMusic.pause();
     mainMenuMusic.currentTime = 0;
   }
+
+  // input field for name in highscore -> needs to pass the value to game
+  nameHighscoreInput.addEventListener("keydown", (event) => {
+    if (event.code === "Enter") {
+      let highscoreName = nameHighscoreInput.value;
+      nameHighscoreInput.style.display = "none";
+      game.currentPlayerHighscoreName = highscoreName;
+      //call method in game to add new name to list and display list
+      restartGameBtn.style.display = "inline";
+      game.saveHighscoresAndDisplayList();
+    }
+  });
 
   //had to add eventlistener as player has to interact with site before playing sound
   //variable to prevent this music from playing again once we click into the game
@@ -78,11 +91,11 @@ window.onload = function () {
         game.gameLoop();
       }
     }
-    if (keyDown.code === "Space") {
+    if (keyDown.code === game.settings.keybindLevelUpDmg) {
       game.player.upgradeWeaponDmg();
     }
 
-    if (keyDown.code === "ShiftLeft") {
+    if (keyDown.code === game.settings.keybindLevelUpAtkSpeed) {
       game.player.upgradeWeaponSpeed();
     }
   });

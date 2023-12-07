@@ -172,7 +172,7 @@ input:checked + .demo-checkbox-button::before {
   transform: translateX(50px);
 }
 
-input {
+#demo-checkbox {
   display: none;
 }
 
@@ -196,6 +196,8 @@ input {
 
 #post-game-screen {
   display: none;
+  font-family: "Nova Square";
+  letter-spacing: 0.05rem;
 }
 
 #game-pause-screen {
@@ -349,4 +351,17 @@ input {
   border-color: #090a0a;
   background-color: rgba(37, 36, 36, 0.212);
   z-index: 98;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+#btn-restart-game {
+  display: none;
+  height: 50px;
+  width: 100px;
+  background-color: aquamarine;
+  border-radius: 30px;
+  font-size: 1.2rem;
 }
