@@ -200,11 +200,9 @@ input:checked + .demo-checkbox-button::before {
   letter-spacing: 0.05rem;
 }
 
-#game-pause-screen {
-  display: none;
-}
-
-#highscore-screen {
+#game-pause-screen,
+#highscore-screen,
+#star-status-ui {
   display: none;
 }
 
@@ -215,7 +213,8 @@ input:checked + .demo-checkbox-button::before {
 #health-ui,
 #bullet-dmg-ui,
 #attack-speed-ui,
-#skillpoints-ui {
+#skillpoints-ui,
+#star-status-ui {
   font-family: "Nova Square";
   font-size: 1.3rem;
   letter-spacing: 0.05rem;
@@ -230,7 +229,10 @@ input:checked + .demo-checkbox-button::before {
   top: 500px;
   left: 510px;
 }
-#skillpoints-ui img {
+#skillpoints-ui img,
+#bullet-dmg-ui img,
+#attack-speed-ui img,
+#star-status-ui img {
   height: 25px;
 }
 
@@ -239,17 +241,9 @@ input:checked + .demo-checkbox-button::before {
   left: 510px;
 }
 
-#bullet-dmg-ui img {
-  height: 25px;
-}
-
 #attack-speed-ui {
   top: 540px;
   left: 510px;
-}
-
-#attack-speed-ui img {
-  height: 25px;
 }
 
 #wave-ui {
@@ -262,9 +256,14 @@ input:checked + .demo-checkbox-button::before {
   left: 160px;
 }
 
+#star-status-ui {
+  top: 580px;
+  left: 5px;
+}
+
 #score-ui {
   font-weight: 400;
-  top: 10px;
+  top: 12px;
   left: 430px;
 }
 
@@ -353,10 +352,6 @@ input:checked + .demo-checkbox-button::before {
   z-index: 98;
 }
 
-ol {
-  list-style-type: decimal;
-}
-
 #btn-restart-game {
   display: none;
   height: 50px;
@@ -364,4 +359,18 @@ ol {
   background-color: aquamarine;
   border-radius: 30px;
   font-size: 1.2rem;
+}
+
+ol {
+  text-align: center;
+}
+
+ol h2 {
+  margin-bottom: 20px;
+}
+
+li {
+  padding: 5px 0;
+  text-align: left;
+  margin-left: 700px;
 }

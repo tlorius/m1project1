@@ -12,6 +12,7 @@ class Game {
     this.bossBar = document.getElementById("boss-health-bar");
     this.experienceBar = document.getElementById("experience-bar");
     this.highscoreList = document.getElementById("highscore-list");
+    this.starTimer = document.getElementById("star-status-ui");
 
     //audio elements
     this.invincibleSound = document.getElementById("invincible-sound");
@@ -71,7 +72,7 @@ class Game {
 
     this.highscores.forEach((highscoreObj) => {
       const currentScoreElement = document.createElement("li");
-      currentScoreElement.innerText = `${highscoreObj.name} - ${highscoreObj.score}`;
+      currentScoreElement.innerText = `${highscoreObj.score} - ${highscoreObj.name}`;
       this.highscoreList.appendChild(currentScoreElement);
     });
   }
@@ -110,11 +111,6 @@ class Game {
       this.player.health = 30;
       this.player.speed = 1.5;
     }
-
-    //testing new entities remove at the end
-    //
-    //this.enemySpawning.currentWave = 8; //8 to get a level ahead of boss
-    //
 
     this.gameLoop();
   }
@@ -347,6 +343,7 @@ class Game {
             this.player.consumedStarPowerUp(currentTime);
             this.playSound(this.invincibleSound, 0.05, 10000);
             this.gameplayMusic.pause();
+            this.starTimer.style.display = "block";
           }
         }
       });
@@ -354,9 +351,17 @@ class Game {
       this.purgePowerUps(powerUpsToRemove);
 
       //star powerup timer check
+      if (this.player.isInvincible) {
+        const starTimerLeft =
+          (this.player.timeWhenStarConsumed + 10000 - currentTime) / 1000;
+        document.getElementById("star-time-left").innerText =
+          starTimerLeft.toFixed(1);
+      }
+
       if (currentTime - this.player.timeWhenStarConsumed > 10000) {
         this.gameplayMusic.play();
         this.player.isInvincible = false;
+        this.starTimer.style.display = "none";
       }
 
       //maybe put in method
