@@ -1,9 +1,13 @@
 window.onload = function () {
   const startGameBtn = document.getElementById("btn-start-game");
   const restartGameBtn = document.getElementById("btn-restart-game");
+  const mainMenuMusic = document.getElementById("main_menu_sound");
+  const demoButtonToggle = document.getElementById("demo-checkbox");
+
   let game;
   let firstClick = true;
-  const mainMenuMusic = document.getElementById("main_menu_sound");
+  //modify this to true for demo modifications to be applied
+  let demoMode = false;
 
   function stopMainMenuMusic() {
     mainMenuMusic.pause();
@@ -15,14 +19,20 @@ window.onload = function () {
   document.addEventListener("click", () => {
     if (firstClick) {
       mainMenuMusic.play();
+      mainMenuMusic.volume = 0.05;
       firstClick = false;
     }
   });
 
-  mainMenuMusic.volume = 0.05;
+  demoButtonToggle.addEventListener("click", () => {
+    demoMode = demoButtonToggle.checked;
+  });
 
   function startNewGame() {
     game = new Game();
+    if (demoMode) {
+      game.demoModeActive = true;
+    }
     game.startGame();
   }
 

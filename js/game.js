@@ -30,6 +30,8 @@ class Game {
     this.gameLoopAnimationId = null;
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
     this.isGamePaused = false;
+    //if this is true, modify start wave to 8,  give player 15 skill points and set level to 51
+    this.demoModeActive = false;
   }
 
   stopSound(audioElement) {
@@ -57,8 +59,15 @@ class Game {
 
     this.player = new Player(this.mainGameScreen);
     this.playSound(this.gameplayMusic, 0.04); //0.04
-    //removing this as the music wouldnt stop playing otherwise
     this.mainMenuMusic.remove();
+
+    if (this.demoModeActive) {
+      this.enemySpawning.currentWave = 8;
+      this.player.level = 51;
+      this.player.skillPointsAvailable = 15;
+      this.player.health = 30;
+      this.player.speed = 1.5;
+    }
 
     //testing new entities remove at the end
     //

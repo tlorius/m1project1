@@ -18,6 +18,11 @@
       <img src="images/player_down.png" alt="Intro Image" />
       <!--Replace this image eventually-->
       <button id="btn-start-game">Start Game</button>
+      <div class="toggle-demo-container">
+        <input type="checkbox" id="demo-checkbox">
+        <label for="demo-checkbox" class="demo-checkbox-button"></label>
+        <p>Enable Demo-Mode</p>
+      </div>
     </div>
 
     <div id="container-game">
@@ -27,9 +32,9 @@
         <div id="wave-ui">Wave: <span id="wave">0</span></div>
         <div id="wave-timer"><span id="wave-time-left">0</div>
         <div id="score-ui">Score: <span id="score">0</div>
+          <div id="skillpoints-ui"><img src="images/skillpoints.png" alt="icon_skillpoints"> <span id="skill-points-avail">0</span></div>
         <div id="bullet-dmg-ui"><img src="images/gun_icon.png" alt="icon_gun"> <span id="bullet-dmg">0</span></div>
         <div id="attack-speed-ui"><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> <span id="atk-speed">0</span></div>
-        <div id="skillpoints-ui"><img src="images/skillpoints.png" alt="icon_skillpoints"> <span id="skill-points-avail">0</span></div>
         <div id="boss-health-bar-border"></div>
         <div id="boss-health-bar"></div>
         <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
@@ -57,6 +62,12 @@
       <p>Final Score= <span id="score-post-game">0</span></p>
       <button id="btn-restart-game">Restart</button>
     </div>
+
+    <div id="highscore-screen">
+      <h2>highscores</h2>
+      <p>1. xdd</p>
+    </div>
+
 
     <!-- Scripts-->
     <script src="js/enemySpawning.js"></script>

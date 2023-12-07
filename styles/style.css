@@ -136,6 +136,46 @@ body {
   padding: 20px 0px;
 }
 
+.toggle-demo-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.demo-checkbox-button {
+  background-color: #d2d2d2;
+  width: 100px;
+  height: 50px;
+  border-radius: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.demo-checkbox-button::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 45px;
+  height: 45px;
+  left: 0px;
+  border-radius: 200px;
+  margin: 2.5px;
+  transition: 0.2s;
+}
+
+input:checked + .demo-checkbox-button {
+  background-color: #20096d;
+}
+
+input:checked + .demo-checkbox-button::before {
+  transform: translateX(50px);
+}
+
+input {
+  display: none;
+}
+
 #container-game {
   display: flex;
   width: 100vw;
@@ -162,6 +202,10 @@ body {
   display: none;
 }
 
+#highscore-screen {
+  display: none;
+}
+
 #wave-ui,
 #wave-timer,
 #score-ui,
@@ -182,7 +226,7 @@ body {
 
 #skillpoints-ui {
   top: 500px;
-  left: 520px;
+  left: 510px;
 }
 #skillpoints-ui img {
   height: 25px;
@@ -190,7 +234,7 @@ body {
 
 #bullet-dmg-ui {
   top: 580px;
-  left: 520px;
+  left: 510px;
 }
 
 #bullet-dmg-ui img {
@@ -199,7 +243,7 @@ body {
 
 #attack-speed-ui {
   top: 540px;
-  left: 520px;
+  left: 510px;
 }
 
 #attack-speed-ui img {
