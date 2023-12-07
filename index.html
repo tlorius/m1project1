@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="game-intro-screen">
-      <img src="images/player_down.png" alt="Intro Image" />
+      <img id="rocket" src="images/player_down.png" alt="Intro Image" />
       <!--Replace this image eventually-->
       <button id="btn-start-game">Start Game</button>
       <div class="toggle-demo-container">
@@ -38,6 +38,7 @@
         <div id="attack-speed-ui"><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> <span id="atk-speed">0</span></div>
         <div id="boss-health-bar-border"></div>
         <div id="boss-health-bar"></div>
+        <div id="boss-name">Mat the var destroyer</div>
         <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
         <div id="experience-bar"></div>
 
@@ -63,10 +64,9 @@
     </div>
 
     <div id="post-game-screen">
-      <h2>Game over placeholder</h2>
+      <p id="wave-announcement">You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <p>Final Score= <span id="score-post-game">0</span></p>
       <input type="text" id="score-name" placeholder="Enter your name to save your highscore and confirm with Enter!">
-      <p>You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <button id="btn-restart-game">Restart</button>
 
       <div id="highscore-screen">

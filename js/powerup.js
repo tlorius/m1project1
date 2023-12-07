@@ -4,7 +4,7 @@ class Powerup extends Entity {
     this.top = Math.floor(Math.random() * 500) + 50;
     this.left = Math.floor(Math.random() * 500) + 50;
     this.timeCreated = performance.now();
-    this.typeRandomizer = Math.random() > 0.1 ? "star" : "healthpack"; //90% chance to spawn healthpack instead of star
+    this.typeRandomizer = Math.random() > 0.9 ? "star" : "healthpack"; //90% chance to spawn healthpack instead of star
     this.setInitialPos();
   }
 

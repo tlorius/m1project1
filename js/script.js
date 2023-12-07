@@ -4,6 +4,8 @@ window.onload = function () {
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
   const nameHighscoreInput = document.getElementById("score-name");
+  const rocket = document.getElementById("rocket");
+  let isVisorOpen = false;
 
   let game;
   let firstClick = true;
@@ -48,6 +50,16 @@ window.onload = function () {
     }
     game.startGame();
   }
+
+  rocket.addEventListener("click", () => {
+    if (isVisorOpen) {
+      rocket.src = "images/rocket_close.gif";
+      isVisorOpen = false;
+    } else {
+      rocket.src = "images/rocket_open.gif";
+      isVisorOpen = true;
+    }
+  });
 
   startGameBtn.addEventListener("click", () => {
     stopMainMenuMusic();

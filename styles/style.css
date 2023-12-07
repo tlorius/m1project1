@@ -198,11 +198,18 @@ input:checked + .demo-checkbox-button::before {
   display: none;
   font-family: "Nova Square";
   letter-spacing: 0.05rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+
+  background-image: url(../images/gameover_background.png);
+  background-size: cover;
+  height: 100svh;
 }
 
 #game-pause-screen,
 #highscore-screen,
-#star-status-ui {
+#star-status-ui,
+#boss-name {
   display: none;
 }
 
@@ -214,7 +221,8 @@ input:checked + .demo-checkbox-button::before {
 #bullet-dmg-ui,
 #attack-speed-ui,
 #skillpoints-ui,
-#star-status-ui {
+#star-status-ui,
+#boss-name {
   font-family: "Nova Square";
   font-size: 1.3rem;
   letter-spacing: 0.05rem;
@@ -263,7 +271,7 @@ input:checked + .demo-checkbox-button::before {
 
 #score-ui {
   font-weight: 400;
-  top: 12px;
+  top: 14px;
   left: 430px;
 }
 
@@ -356,7 +364,8 @@ input:checked + .demo-checkbox-button::before {
   display: none;
   height: 50px;
   width: 100px;
-  background-color: aquamarine;
+  background-color: red;
+  color: white;
   border-radius: 30px;
   font-size: 1.2rem;
 }
@@ -373,4 +382,10 @@ li {
   padding: 5px 0;
   text-align: left;
   margin-left: 700px;
+}
+
+#boss-name {
+  font-size: 0.9rem;
+  left: 220px;
+  top: 15px;
 }

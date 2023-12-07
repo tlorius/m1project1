@@ -10,9 +10,12 @@ class Game {
     //on screen elements
     this.bossBarBorder = document.getElementById("boss-health-bar-border");
     this.bossBar = document.getElementById("boss-health-bar");
+    this.bossName = document.getElementById("boss-name");
     this.experienceBar = document.getElementById("experience-bar");
     this.highscoreList = document.getElementById("highscore-list");
     this.starTimer = document.getElementById("star-status-ui");
+    this.waveTimer = document.getElementById("wave-timer");
+    this.waveUi = document.getElementById("wave-ui");
 
     //audio elements
     this.invincibleSound = document.getElementById("invincible-sound");
@@ -233,11 +236,15 @@ class Game {
         }
       }
 
-      //UPDATE BOSS BAR
+      //UPDATE BOSS BAR and remove wave timer
       if (this.enemies[0] instanceof EnemyBoss) {
         this.bossBar.style.display = "block";
         this.bossBarBorder.style.display = "block";
         this.updateBossBar();
+
+        this.waveTimer.style.display = "none";
+        this.waveUi.style.display = "none";
+        this.bossName.style.display = "block";
       }
       //
 
@@ -385,11 +392,22 @@ class Game {
       if (this.gameState === "Win" || this.gameState === "Lose") {
         //Code for won game or lost game, can replace with second if else statement if needed to separate
         this.getHighscores();
+
+        if (this.gameState === "Win") {
+          document.getElementById("wave-post-game").innerText = "";
+          document.getElementById("wave-announcement").innerText =
+            "Good Job! You beat the Game!";
+        } else {
+          document.getElementById("wave-post-game").innerText =
+            this.enemySpawning.currentWave;
+        }
+
         this.mainGameScreen.style.display = "none";
         this.gameOverScreen.style.display = "block";
         this.player.element.remove();
         this.stopSound(this.gameplayMusic);
         this.stopSound(this.bossMusic);
+
         document.getElementById("score-post-game").innerText =
           this.player.score;
       } else {
