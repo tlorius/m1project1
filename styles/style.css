@@ -133,13 +133,26 @@ body {
 }
 
 #game-intro-screen {
-  padding: 20px 0px;
+  font-family: "Nova Square";
+  display: flex; /* play with this*/
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  letter-spacing: 0.05rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+
+  background-image: url(../images/gameover_background.png);
+  background-size: cover;
+  height: 100svh;
 }
 
 .toggle-demo-container {
   display: flex;
   align-items: center;
   align-content: center;
+  justify-content: space-evenly;
+  width: 30vw;
 }
 
 .demo-checkbox-button {
@@ -179,8 +192,8 @@ input:checked + .demo-checkbox-button::before {
 #container-game {
   display: flex;
   width: 100vw;
-  padding: 20px 0px;
   justify-content: center;
+  align-items: center;
 }
 
 #main-game-screen {
@@ -292,11 +305,6 @@ input:checked + .demo-checkbox-button::before {
   height: 20px;
 }
 
-#tooltips-ui p {
-  line-height: 2rem;
-  font-size: 1.5rem;
-}
-
 #tooltips-ui p img {
   height: 25px;
 }
@@ -360,14 +368,26 @@ input:checked + .demo-checkbox-button::before {
   z-index: 98;
 }
 
+#btn-start-game {
+  height: 70px;
+  width: 250px;
+  background-color: #313639;
+  color: white;
+  border-radius: 40px;
+  border-color: #313639;
+  font-size: 1.2rem;
+}
+
 #btn-restart-game {
   display: none;
-  height: 50px;
-  width: 100px;
-  background-color: red;
+  height: 70px;
+  width: 250px;
+  background-color: #313639;
   color: white;
-  border-radius: 30px;
+  border-radius: 40px;
+  border-color: #313639;
   font-size: 1.2rem;
+  margin: 30px;
 }
 
 ol {
@@ -375,17 +395,68 @@ ol {
 }
 
 ol h2 {
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 li {
   padding: 5px 0;
   text-align: left;
-  margin-left: 700px;
+  margin-left: 750px;
 }
 
 #boss-name {
   font-size: 0.9rem;
-  left: 220px;
+  left: 230px;
   top: 15px;
+}
+
+#tooltips-ui {
+  display: none;
+  text-align: left;
+  font-family: "Nova Square";
+  letter-spacing: 0.05rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+#tooltips-ui p {
+  line-height: 2rem;
+  font-size: 1rem;
+}
+
+#post-game-screen p {
+  padding: 20px 0;
+}
+
+#post-game-screen input {
+  font-family: "Nova Square";
+  letter-spacing: 0.05rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: white;
+  width: 500px;
+  height: 50px;
+  text-align: center;
+  background-color: #313639;
+}
+
+#game-introduction-text {
+  font-size: 1.2rem;
+  width: 70vw;
+}
+h1 {
+  font-size: 3rem;
+}
+
+#game-pause-screen {
+  font-family: "Nova Square";
+  letter-spacing: 0.05rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  background-image: url(../images/gameover_background.png);
+  background-size: cover;
+  height: 100svh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

@@ -15,9 +15,12 @@
   </head>
   <body>
     <div id="game-intro-screen">
+      <h1>The lone guardian of the galaxy</h1>
       <img id="rocket" src="images/player_down.png" alt="Intro Image" />
-      <!--Replace this image eventually-->
       <button id="btn-start-game">Start Game</button>
+      <p id="game-introduction-text">In the year 2154, a lone guardian faces the vast expanse of space, surrounded by relentless and hostile lifeforms eager for a cosmic showdown.
+
+        Your role is pivotal: navigate this brave defender through the onslaught of enemy waves, each one pushing the boundaries of survival. The fate of the guardian rests in your hands. Can you stand tall against the cosmic threats and ensure the guardian's triumph? The universe awaits your courage and skill in this epic battle for survival.</p>
       <div class="toggle-demo-container">
         <input type="checkbox" id="demo-checkbox">
         <label for="demo-checkbox" class="demo-checkbox-button"></label>
@@ -38,7 +41,7 @@
         <div id="attack-speed-ui"><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> <span id="atk-speed">0</span></div>
         <div id="boss-health-bar-border"></div>
         <div id="boss-health-bar"></div>
-        <div id="boss-name">Mat the var destroyer</div>
+        <div id="boss-name">Mat the destroyer</div>
         <div id="experience-bar-border">    |   |   |   |   |   |   |   |   |   |   </div>
         <div id="experience-bar"></div>
 
@@ -52,15 +55,18 @@
       </div>
 
 
-      <div id="tooltips-ui"><p>controls: wasd - move, arrowkeys = shoot</p>
+      <div id="tooltips-ui">
+      <p><img src="images/wasd.png" alt="wasd_keys"> Move character</p>
+      <p><img src="images/arrowkeys.png" alt="arrow_keys"> Shoot bullets - Hint: You can combine 2 directions!</p>
+      <p><img src="images/space.png" alt="spacebar_icon"> Use space to upgrade your bullet damage <img src="images/gun_icon.png" alt="icon_gun"> </p>
+      <p><img src="images/shift.png" alt="shift_icon"> Use left shift to upgrade your attack speed <img src="images/atk_speed_icon.png" alt="bullet-speed-icon"></p>
       <p><img src="images/skillpoints.png" alt="icon_skillpoints"> - Available Skillpoints to Level Up either Bullet Damage or Attack speed</p>
-      <p><img src="images/gun_icon.png" alt="icon_gun"> - Current Bullet Damage - To level up press: SPACEBAR</p>
-      <p><img src="images/atk_speed_icon.png" alt="bullet-speed-icon"> - Current Gun Attack Speed - To level up press: left shift</p>
     </div>
     </div>
 
     <div id="game-pause-screen">
-      <h2>Paused... but your timer is still running</h2>
+      <h2>Paused... but is it actually?</h2>
+      <audio id="pause-music" src="audio/pausemusic.m4a"></audio>
     </div>
 
     <div id="post-game-screen">

@@ -6,6 +6,7 @@ class Game {
     this.gameOverScreen = document.getElementById("post-game-screen");
     this.gamePauseScreen = document.getElementById("game-pause-screen");
     this.highscoreScreen = document.getElementById("highscore-screen");
+    this.toolTipsUi = document.getElementById("tooltips-ui");
 
     //on screen elements
     this.bossBarBorder = document.getElementById("boss-health-bar-border");
@@ -24,6 +25,7 @@ class Game {
     this.gameplayMusic = document.getElementById("gameplay-background-sound");
     this.bossMusic = document.getElementById("boss-sound");
     this.mainMenuMusic = document.getElementById("main_menu_sound");
+    this.pauseMusic = document.getElementById("pause-music");
 
     this.settings = new Settings(this.gamePauseScreen);
     this.enemySpawning = new EnemySpawning();
@@ -99,6 +101,7 @@ class Game {
     this.gameOverScreen.style.display = "none";
     this.gamePauseScreen.style.display = "none";
     this.mainGameScreen.style.display = "block";
+    this.toolTipsUi.style.display = "block";
 
     this.mainGameScreen.style.height = `${this.height}px`;
     this.mainGameScreen.style.width = `${this.width}px`;
@@ -155,7 +158,8 @@ class Game {
   gameLoop() {
     //opens pause screen if game is paused
     if (this.isGamePaused) {
-      this.gamePauseScreen.style.display = "block";
+      this.gamePauseScreen.style.display = "flex";
+      this.toolTipsUi.style.display = "none";
       this.mainGameScreen.style.display = "none";
       //prevents gameloop from running until unpaused
     } else {
@@ -385,6 +389,7 @@ class Game {
       document.getElementById("skill-points-avail").innerText =
         this.player.skillPointsAvailable;
 
+      // specific Lose logic
       if (this.player.health <= 0) {
         this.gameState = "Lose";
       }
@@ -393,16 +398,18 @@ class Game {
         //Code for won game or lost game, can replace with second if else statement if needed to separate
         this.getHighscores();
 
+        //Specific Win logic
         if (this.gameState === "Win") {
           document.getElementById("wave-post-game").innerText = "";
           document.getElementById("wave-announcement").innerText =
-            "Good Job! You beat the Game!";
+            "Good Job! You made it out of there alive!";
         } else {
           document.getElementById("wave-post-game").innerText =
             this.enemySpawning.currentWave;
         }
 
         this.mainGameScreen.style.display = "none";
+        this.toolTipsUi.style.display = "none";
         this.gameOverScreen.style.display = "block";
         this.player.element.remove();
         this.stopSound(this.gameplayMusic);

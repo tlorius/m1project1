@@ -100,6 +100,7 @@ window.onload = function () {
       if (!game.isGamePaused) {
         game.gamePauseScreen.style.display = "none";
         game.mainGameScreen.style.display = "block";
+        game.toolTipsUi.style.display = "block";
         game.gameLoop();
       }
     }

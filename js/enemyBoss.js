@@ -1,7 +1,7 @@
 class EnemyBoss extends Enemy {
   constructor(mainGameScreen) {
     super(mainGameScreen);
-    this.health = 1337;
+    this.health = 2000;
     this.maxHealth = this.health;
     this.top = 700;
     this.left = 230;
