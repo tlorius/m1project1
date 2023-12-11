@@ -24,6 +24,7 @@ class Enemy extends Entity {
     ];
     this.left = this.spawnPoints[this.spawnSeed].left;
     this.top = this.spawnPoints[this.spawnSeed].top;
+    this.element.style.zIndex = "1";
     this.angleToPlayer = 0;
   }
 
@@ -51,9 +52,15 @@ class Enemy extends Entity {
   }
 
   //math to calculate new position based on the calculated angle
-  move() {
-    this.left += Math.cos(this.angleToPlayer) * this.speed;
-    this.top += Math.sin(this.angleToPlayer) * this.speed;
+  move(currentTime) {
+    const elapsedTimeInSeconds =
+      (currentTime - this.previousMoveTimestamp) / 1000;
+    this.previousMoveTimestamp = currentTime;
+
+    this.left +=
+      Math.cos(this.angleToPlayer) * this.speed * elapsedTimeInSeconds;
+    this.top +=
+      Math.sin(this.angleToPlayer) * this.speed * elapsedTimeInSeconds;
 
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;

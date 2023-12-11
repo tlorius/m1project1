@@ -34,7 +34,7 @@ class Projectile extends Entity {
     //inverting player aim value to create desired trajectory
     this.directionY = aimingUp * -1;
     this.directionX = aimingLeft * -1;
-    this.speed = 2;
+    this.speed = 300;
     this.height = 10;
     this.width = 10;
     this.damage = damageValue;

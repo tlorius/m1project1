@@ -8,7 +8,8 @@ class Entity {
     this.width = 0;
     this.directionX = 0; //check if I need to handle movement differently
     this.directionY = 0;
-    this.speed = 1;
+    this.previousMoveTimestamp = performance.now();
+    this.speed = 150;
 
     this.element = document.createElement("img");
     this.element.style.position = "absolute";
@@ -25,9 +26,13 @@ class Entity {
     this.element.style.top = `${this.top}px`;
   }
 
-  move() {
-    this.left += this.directionX * this.speed;
-    this.top += this.directionY * this.speed;
+  move(currentTime) {
+    const elapsedTimeInSeconds =
+      (currentTime - this.previousMoveTimestamp) / 1000;
+    this.previousMoveTimestamp = currentTime;
+
+    this.left += this.directionX * this.speed * elapsedTimeInSeconds;
+    this.top += this.directionY * this.speed * elapsedTimeInSeconds;
 
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;

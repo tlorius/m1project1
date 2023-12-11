@@ -85,7 +85,7 @@ class EnemySpawning {
         spawnFrequency: 0.01,
       },
     ];
-    this.waveCooldownTime = 5; //in seconds
+    this.waveCooldownTime = 10; //in seconds
     this.lastEnemySpawnTime = performance.now();
     this.lastWaveEndTime = performance.now();
     this.currentWaveStartTime = performance.now();

@@ -111,7 +111,7 @@ The lone guardian of the galaxy is a game in which the player has to defend hims
   - this.enemySpawning
   - this.player
   - this.height
-  - this.width;
+  - this.width
   - this.enemies
   - this.projectiles
   - this.powerUps
@@ -120,7 +120,7 @@ The lone guardian of the galaxy is a game in which the player has to defend hims
   - this.isGamePaused
   - this.highscores
   - this.currentPlayerHighscoreName
-  - this.demoModeActive = false
+  - this.demoModeActive
 
 - sortHighscoresAndReturnTopTen(scoreArray)
 - getHighscores()

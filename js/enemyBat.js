@@ -4,7 +4,7 @@ class EnemyBat extends Enemy {
     this.health = Math.ceil(this.healthSeed * 3);
     this.height = 22.44 + 6.28 * this.health;
     this.width = 25 + 7 * this.health;
-    this.speed = 0.8;
+    this.speed = 120;
     this.pointsReceivedIfKilled = 250 + 100 * this.health;
     this.experienceIfKilled = 10 + this.health;
 

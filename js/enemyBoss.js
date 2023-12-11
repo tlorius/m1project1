@@ -7,7 +7,7 @@ class EnemyBoss extends Enemy {
     this.left = 230;
     this.height = 241;
     this.width = 308;
-    this.speed = 0.2;
+    this.speed = 30;
     this.pointsReceivedIfKilled = 50000;
     this.experienceIfKilled = 100;
 

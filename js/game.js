@@ -115,7 +115,7 @@ class Game {
       this.player.level = 51;
       this.player.skillPointsAvailable = 15;
       this.player.health = 30;
-      this.player.speed = 1.5;
+      this.player.speed = 180;
     }
 
     this.gameLoop();
@@ -163,7 +163,8 @@ class Game {
       this.mainGameScreen.style.display = "none";
       //prevents gameloop from running until unpaused
     } else {
-      this.player.move();
+      const currentTime = performance.now();
+      this.player.move(currentTime);
       this.player.aim();
 
       if (this.player.shooting()) {
@@ -188,7 +189,7 @@ class Game {
       const enemiesToRemove = [];
 
       for (const currentProjectile of this.projectiles) {
-        currentProjectile.move();
+        currentProjectile.move(currentTime);
 
         if (
           currentProjectile.top < -10 ||
@@ -261,15 +262,15 @@ class Game {
       const enemiesToRemoveAfterPlayerCollision = [];
       this.enemies.forEach((currentEnemy) => {
         //update enemy player tracking every 50 gameloops, maybe remove this later if game runs smooth anyways
-        if (this.gameLoopAnimationId % 50 === 0) {
-          currentEnemy.trackPlayerPosition(
-            this.player.top,
-            this.player.left,
-            this.player.height,
-            this.player.width
-          );
-        }
-        currentEnemy.move();
+
+        currentEnemy.trackPlayerPosition(
+          this.player.top,
+          this.player.left,
+          this.player.height,
+          this.player.width
+        );
+
+        currentEnemy.move(currentTime);
 
         //logic for player to lose hp
         //note: invincibility only applies to non boss monsters, would be too strong
@@ -294,7 +295,6 @@ class Game {
       this.purgeEnemies(enemiesToRemoveAfterPlayerCollision);
 
       //Wave spawning logic, majority of the calculations handled inside enemySpawning instance
-      const currentTime = performance.now();
       //returns true if new wave can start -> using to initialize boss music
       if (
         this.enemySpawning.startNewWave(currentTime) &&
@@ -331,7 +331,7 @@ class Game {
         }
       }
       //powerup spawning chance logic
-      if (Math.random() > 0.9993 && this.player.canPowerUpSpawn()) {
+      if (this.player.canPowerUpSpawn()) {
         this.powerUps.push(new Powerup(this.mainGameScreen));
         const newPowerUp = this.powerUps[this.powerUps.length - 1];
         if (newPowerUp.typeRandomizer === "star") {

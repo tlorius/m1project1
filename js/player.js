@@ -17,12 +17,16 @@ class Player extends Entity {
     this.experience = 0;
     this.level = 0;
     this.skillPointsAvailable = 0;
-    this.speed = 0.8; //default 0.8
+    this.speed = 110;
     this.health = 5;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
-    this.powerUpOnCooldown = false;
-    this.powerUpCooldownInSeconds = 30;
+    this.powerUpOnCooldown = true;
+    this.powerUpCooldownInSeconds = 60;
+    setTimeout(
+      () => (this.powerUpOnCooldown = false),
+      1000 * this.powerUpCooldownInSeconds * 1.5
+    );
     this.bulletDamage = 1; //1 default allow this to be modified by powerups
     this.isInvincible = false;
     this.timeWhenStarConsumed;
@@ -53,9 +57,14 @@ class Player extends Entity {
     }
   }
 
-  move() {
-    let newLeft = this.left + this.directionX * this.speed;
-    let newTop = this.top + this.directionY * this.speed;
+  move(currentTime) {
+    const elapsedTimeInSeconds =
+      (currentTime - this.previousMoveTimestamp) / 1000;
+    this.previousMoveTimestamp = currentTime;
+
+    let newLeft =
+      this.left + this.directionX * this.speed * elapsedTimeInSeconds;
+    let newTop = this.top + this.directionY * this.speed * elapsedTimeInSeconds;
 
     if (newLeft > 0 && newLeft < 600 - this.width) {
       this.left = newLeft;
@@ -112,7 +121,7 @@ class Player extends Entity {
       case 45:
       case 50:
         this.skillPointsAvailable += 1;
-        this.speed += 0.05;
+        this.speed += 5;
         break;
     }
   }
