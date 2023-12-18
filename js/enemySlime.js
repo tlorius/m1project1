@@ -4,7 +4,7 @@ class EnemySlime extends Enemy {
     this.health = Math.ceil(this.healthSeed * 4);
     this.height = 10 + 7.5 * this.health;
     this.width = 10 + 7.5 * this.health;
-    this.speed = 50;
+    this.speed = 70;
     this.pointsReceivedIfKilled = 100 + 50 * this.health;
     this.experienceIfKilled = 5 + this.health;
 
