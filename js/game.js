@@ -38,6 +38,8 @@ class Game {
     this.gameLoopAnimationId = null;
     this.gameState = "Ongoing"; //"Ongoing", "Win", "Lose"
     this.isGamePaused = false;
+    this.totalPauseDuration = 0;
+    this.pauseStartTime = 0;
     this.highscores = [];
     this.currentPlayerHighscoreName = "";
     //if this is true, modify start wave to 8,  give player 15 skill points and set level to 51
@@ -93,6 +95,19 @@ class Game {
 
     if (duration) {
       setTimeout(() => this.stopSound(audioElement), duration);
+    }
+  }
+
+  pauseGame() {
+    if (!this.isGamePaused) {
+      this.pauseStartTime = performance.now();
+    }
+  }
+
+  unpauseGame() {
+    if (this.isGamePaused) {
+      let pauseDuration = performance.now() - this.pauseStartTime;
+      this.totalPauseDuration += pauseDuration;
     }
   }
 
@@ -163,9 +178,17 @@ class Game {
       this.mainGameScreen.style.display = "none";
       //prevents gameloop from running until unpaused
     } else {
-      const currentTime = performance.now();
+      let currentTime;
+
+      if (this.totalPauseDuration > 0) {
+        currentTime = performance.now() - this.totalPauseDuration;
+      } else {
+        currentTime = performance.now();
+      }
+
       this.player.move(currentTime);
       this.player.aim();
+      console.table(this.player.left, this.player.top);
 
       if (this.player.shooting()) {
         //create new instance of projectile at players location with players current aim(pass on creation)
@@ -177,7 +200,8 @@ class Game {
             this.player.aimingUp,
             this.player.aimingLeft,
             this.player.bulletDamage,
-            this.player.isInvincible
+            this.player.isInvincible,
+            currentTime
           )
         );
       }

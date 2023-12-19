@@ -194,6 +194,7 @@ input:checked + .demo-checkbox-button::before {
   width: 100vw;
   justify-content: center;
   align-items: center;
+  max-height: 100svh;
 }
 
 #main-game-screen {
@@ -211,6 +212,7 @@ input:checked + .demo-checkbox-button::before {
   display: none;
   font-family: "Nova Square";
   letter-spacing: 0.05rem;
+  font-size: 1rem;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 

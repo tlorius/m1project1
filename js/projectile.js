@@ -6,7 +6,8 @@ class Projectile extends Entity {
     aimingUp,
     aimingLeft,
     damageValue,
-    isPlayerInvincible
+    isPlayerInvincible,
+    currentTime
   ) {
     super(mainGameScreen);
 
@@ -38,6 +39,7 @@ class Projectile extends Entity {
     this.height = 10;
     this.width = 10;
     this.damage = damageValue;
+    this.previousMoveTimestamp = currentTime;
 
     this.element.src =
       this.damage > 1.5

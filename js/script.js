@@ -96,6 +96,8 @@ window.onload = function () {
       game.player.directionX = -1;
     }
     if (keyDown.code === "Escape") {
+      game.pauseGame();
+      game.unpauseGame();
       game.isGamePaused = !game.isGamePaused;
       if (!game.isGamePaused) {
         game.gamePauseScreen.style.display = "none";
