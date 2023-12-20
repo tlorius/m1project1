@@ -16,6 +16,7 @@ class Settings {
       case this.keybindAimRight:
       case this.keybindLevelUpDmg:
       case this.keybindLevelUpAtkSpeed:
+      case "Escape":
         return true;
       default:
         return false;

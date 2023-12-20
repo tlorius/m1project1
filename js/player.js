@@ -17,7 +17,7 @@ class Player extends Entity {
     this.experience = 0;
     this.level = 0;
     this.skillPointsAvailable = 0;
-    this.speed = 120;
+    this.speed = 130;
     this.health = 5;
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
@@ -121,7 +121,7 @@ class Player extends Entity {
       case 45:
       case 50:
         this.skillPointsAvailable += 1;
-        this.speed += 5;
+        this.speed += 7;
         break;
     }
   }
