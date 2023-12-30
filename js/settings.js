@@ -15,18 +15,21 @@ class Settings {
   }
 
   displaySelectedMenu(selectedMenu) {
-    this.allPauseMenus.forEach((menuElement) => {
-      menuElement.style.display = "none";
-    });
+    this.pauseKeybindMenu.style.display = "none";
+    this.pauseMainMenu.style.display = "none";
+    this.pauseKeybindModal.style.display = "none";
+    this.pauseSoundMenu.style.display = "none";
 
     this[selectedMenu].style.display = "block";
     this.currentlyDisplayedMenu = selectedMenu;
   }
 
   handleEscPress() {
-    this.allPauseMenus.forEach((menuElement) => {
-      menuElement.style.display = "none";
-    });
+    this.pauseKeybindMenu.style.display = "none";
+    this.pauseMainMenu.style.display = "none";
+    this.pauseKeybindModal.style.display = "none";
+    this.pauseSoundMenu.style.display = "none";
+
     switch (this.currentlyDisplayedMenu) {
       case "pauseKeybindMenu":
       case "pauseSoundMenu":

@@ -507,14 +507,13 @@ div.feedback {
 
 .menuItemCtn {
   margin-top: 5rem;
-  border-radius: 1rem;
-  padding: 1rem 3rem;
-  background-color: #313639;
-  border: solid black 0.2rem;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .keybindsMenuCtn {
   display: none;
+  cursor: pointer;
 }
 
 .soundsMenuCtn {
@@ -523,4 +522,29 @@ div.feedback {
 
 .difficultyMenuCtn {
   display: none;
+}
+
+.menuButton {
+  padding: 10px 20px;
+  margin: 10px;
+  color: white;
+  background: #0a0b1a;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 5px #999;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  background-color: #13152a;
+}
+
+.menuButton:active {
+  background-color: #13152a;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
 }
