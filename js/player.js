@@ -22,7 +22,7 @@ class Player extends Entity {
     this.shootingOnCooldown = false;
     this.shootingCooldownInSeconds = 0.3; //0.3 default
     this.powerUpOnCooldown = true;
-    this.powerUpCooldownInSeconds = 60;
+    this.powerUpCooldownInSeconds = 30;
     setTimeout(
       () => (this.powerUpOnCooldown = false),
       1000 * this.powerUpCooldownInSeconds * 1.5
@@ -111,6 +111,10 @@ class Player extends Entity {
       case 3:
       case 4:
       case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
       case 10:
       case 15:
       case 20:
