@@ -6,7 +6,7 @@ class Entity {
     this.top = 0;
     this.height = 0;
     this.width = 0;
-    this.directionX = 0; //check if I need to handle movement differently
+    this.directionX = 0;
     this.directionY = 0;
     this.previousMoveTimestamp = performance.now();
     this.speed = 150;

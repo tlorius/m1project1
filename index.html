@@ -65,7 +65,29 @@
     </div>
 
     <div id="game-pause-screen">
-      <h2>Paused... but is it actually?</h2>
+      <h2>Game is paused...press Esc to unpause it</h2>
+      <div class="menuItemCtn allMenuScreens">
+        <p class="keybindMenuItem">Change Keybinds <button type="button" id="testkbbutton">Test change kb</button></p>
+        <p class="soundMenuItem">Sound Settings</p>
+        <p class="difficultyMenuItem">Adjust Difficulty</p>
+      </div>
+      <div class="keybindsMenuCtn">
+        <p>rebind move up</p>
+        <p>rebind move left</p>
+      </div>
+      <div id="keybindModal" class="modal allMenuScreens">
+        <div class="modal-content">
+          <span class="close-button">×</span>
+          <p id="modalText">Enter new key for <span id="keybindName">keybind X</span></p>
+          <p id="feedbackText" class="feedback"></p>
+        </div>
+      </div>
+      <div class="soundsMenuCtn allMenuScreens">
+        <p>change volume</p>
+      </div>
+      <div class="difficultyMenuCtn allMenuScreens">
+        <p>change Difficulty</p>
+      </div>
       <audio id="pause-music" src="audio/pausemusic.m4a"></audio>
     </div>
 

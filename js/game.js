@@ -188,7 +188,6 @@ class Game {
 
       this.player.move(currentTime);
       this.player.aim();
-      console.table(this.player.left, this.player.top);
 
       if (this.player.shooting()) {
         //create new instance of projectile at players location with players current aim(pass on creation)

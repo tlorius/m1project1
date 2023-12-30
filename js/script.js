@@ -4,6 +4,7 @@ window.onload = function () {
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
   const nameHighscoreInput = document.getElementById("score-name");
+  const rebindBtn = document.getElementById("testkbbutton");
   const rocket = document.getElementById("rocket");
   let isVisorOpen = false;
 
@@ -178,5 +179,10 @@ window.onload = function () {
             : game.player.aimingLeft;
         break;
     }
+  });
+
+  rebindBtn.addEventListener("click", () => {
+    game.settings.startReassigning("keybindLevelUpAtkSpeed");
+    game.settings.reassignKeybind("KeyP");
   });
 };

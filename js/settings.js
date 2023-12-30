@@ -2,6 +2,8 @@ class Settings {
   constructor(gamePauseScreen) {
     this.gamePauseScreen = gamePauseScreen;
     this.restoreDefaultKeybinds();
+    this.currentlyReassigning = false;
+    this.currentActionToChange = "keybindMoveUp";
   }
 
   isKeyAlreadyAssigned(keyCode) {
@@ -34,5 +36,25 @@ class Settings {
     this.keybindAimRight = "ArrowRight";
     this.keybindLevelUpDmg = "Space";
     this.keybindLevelUpAtkSpeed = "ShiftLeft";
+  }
+
+  startReassigning(selectedAction) {
+    if (this.currentlyReassigning === false) {
+      this.currentActionToChange = selectedAction;
+      console.log(this.currentActionToChange);
+      this.currentlyReassigning = true;
+    }
+  }
+
+  reassignKeybind(selectedKey) {
+    if (this.currentlyReassigning === true) {
+      if (this.isKeyAlreadyAssigned(selectedKey)) {
+        console.log(`This key is already in use`);
+      } else {
+        this[this.currentActionToChange] = selectedKey;
+        console.log(this.keybindLevelUpAtkSpeed);
+        this.currentlyReassigning = false;
+      }
+    }
   }
 }
