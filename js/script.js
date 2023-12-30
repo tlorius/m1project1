@@ -76,16 +76,16 @@ window.onload = function () {
       firstClick = false;
     }
   });
-
+  /* deprecated
   demoButtonToggle.addEventListener("click", () => {
     demoMode = demoButtonToggle.checked;
-  });
+  });*/
 
   function startNewGame() {
     game = new Game();
-    if (demoMode) {
+    /* if (demoMode) {
       game.demoModeActive = true;
-    }
+    }*/
     game.difficulty = setDifficulty.innerText.toLowerCase();
     game.startGame();
   }

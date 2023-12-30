@@ -1,5 +1,5 @@
 class Player extends Entity {
-  constructor(mainGameScreen) {
+  constructor(mainGameScreen, difficulty) {
     super(mainGameScreen);
     this.levelUpSound = document.getElementById("levelup-sound");
     //base properties
@@ -18,16 +18,44 @@ class Player extends Entity {
     this.level = 0;
     this.skillPointsAvailable = 0;
     this.speed = 130;
-    this.health = 5;
+    this.health =
+      difficulty === "easy"
+        ? 30
+        : difficulty === "default"
+        ? 10
+        : difficulty === "hard"
+        ? 5
+        : 1;
     this.shootingOnCooldown = false;
-    this.shootingCooldownInSeconds = 0.3; //0.3 default
+    this.shootingCooldownInSeconds =
+      difficulty === "easy"
+        ? 0.2
+        : difficulty === "default"
+        ? 0.3
+        : difficulty === "hard"
+        ? 0.35
+        : 0.4;
     this.powerUpOnCooldown = true;
-    this.powerUpCooldownInSeconds = 30;
+    this.powerUpCooldownInSeconds =
+      difficulty === "easy"
+        ? 15
+        : difficulty === "default"
+        ? 30
+        : difficulty === "hard"
+        ? 90
+        : 180;
     setTimeout(
       () => (this.powerUpOnCooldown = false),
       1000 * this.powerUpCooldownInSeconds * 1.5
     );
-    this.bulletDamage = 1; //1 default allow this to be modified by powerups
+    this.bulletDamage =
+      difficulty === "easy"
+        ? 2
+        : difficulty === "default"
+        ? 1.5
+        : difficulty === "hard"
+        ? 1
+        : 1; //1 default allow this to be modified by powerups
     this.isInvincible = false;
     this.timeWhenStarConsumed;
 

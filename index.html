@@ -33,11 +33,14 @@
       <p id="game-introduction-text">In the year 2154, a lone guardian faces the vast expanse of space, surrounded by relentless and hostile lifeforms eager for a cosmic showdown.
 
         Your role is pivotal: navigate this brave defender through the onslaught of enemy waves, each one pushing the boundaries of survival. The fate of the guardian rests in your hands. Can you stand tall against the cosmic threats and ensure the guardian's triumph? The universe awaits your courage and skill in this epic battle for survival.</p>
-      <div class="toggle-demo-container">
+      <!--
+        <div class="toggle-demo-container">
         <input type="checkbox" id="demo-checkbox">
         <label for="demo-checkbox" class="demo-checkbox-button"></label>
         <p>Enable Demo-Mode</p>
       </div>
+      -->
+        
     </div>
 
     <div id="container-game">
@@ -125,6 +128,7 @@
     <div id="post-game-screen">
       <p id="wave-announcement">You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <p>Final Score= <span id="score-post-game">0</span></p>
+      <p>You hit <span id="accuracyInPercent">0</span>% of the bullets you shot at enemies!</p>
       <input type="text" id="score-name" placeholder="Enter your name to save your highscore and confirm with Enter!">
       <button id="btn-restart-game" class="menuButton">Restart</button>
 
