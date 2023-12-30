@@ -4,7 +4,8 @@ window.onload = function () {
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
   const nameHighscoreInput = document.getElementById("score-name");
-  const rebindBtn = document.getElementById("testkbbutton");
+  const keybindMenuBtn = document.querySelector(".keybindMenuItem");
+  const soundMenuBtn = document.querySelector(".soundMenuItem");
   const rocket = document.getElementById("rocket");
   let isVisorOpen = false;
 
@@ -191,9 +192,15 @@ window.onload = function () {
     }
   });
 
-  rebindBtn.addEventListener("click", () => {
+  keybindMenuBtn.addEventListener("click", () => {
     //game.settings.startReassigning("keybindLevelUpAtkSpeed");
     //game.settings.reassignKeybind("KeyP");
     game.settings.displaySelectedMenu("pauseKeybindMenu");
+  });
+
+  soundMenuBtn.addEventListener("click", () => {
+    //game.settings.startReassigning("keybindLevelUpAtkSpeed");
+    //game.settings.reassignKeybind("KeyP");
+    game.settings.displaySelectedMenu("pauseSoundMenu");
   });
 };
