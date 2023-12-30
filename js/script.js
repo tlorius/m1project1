@@ -97,14 +97,24 @@ window.onload = function () {
       game.player.directionX = -1;
     }
     if (keyDown.code === "Escape") {
-      game.pauseGame();
-      game.unpauseGame();
-      game.isGamePaused = !game.isGamePaused;
+      //pause game if its currently not paused
       if (!game.isGamePaused) {
+        game.pauseGame();
+        game.isGamePaused = true;
+        //unpause game if its paused and we are on the top level menu of the pause screen
+      } else if (
+        game.isGamePaused &&
+        game.settings.currentlyDisplayedMenu === "pauseMainMenu"
+      ) {
+        game.unpauseGame();
+        game.isGamePaused = false;
         game.gamePauseScreen.style.display = "none";
         game.mainGameScreen.style.display = "block";
         game.toolTipsUi.style.display = "block";
         game.gameLoop();
+        //handle reverse menu navigation in any other case using esc button
+      } else {
+        game.settings.handleEscPress();
       }
     }
     if (keyDown.code === game.settings.keybindLevelUpDmg) {
@@ -182,7 +192,8 @@ window.onload = function () {
   });
 
   rebindBtn.addEventListener("click", () => {
-    game.settings.startReassigning("keybindLevelUpAtkSpeed");
-    game.settings.reassignKeybind("KeyP");
+    //game.settings.startReassigning("keybindLevelUpAtkSpeed");
+    //game.settings.reassignKeybind("KeyP");
+    game.settings.displaySelectedMenu("pauseKeybindMenu");
   });
 };

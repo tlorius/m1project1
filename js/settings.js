@@ -4,6 +4,41 @@ class Settings {
     this.restoreDefaultKeybinds();
     this.currentlyReassigning = false;
     this.currentActionToChange = "keybindMoveUp";
+    this.currentlyDisplayedMenu = "pauseMainMenu"; // states: pauseMainMenu, pauseKeybindMenu, pauseKeybindModal, pauseSoundMenu
+    this.allPauseMenus =
+      this.gamePauseScreen.querySelectorAll(".allMenuScreens");
+    this.pauseMainMenu = this.gamePauseScreen.querySelector(".mainMenuCtn");
+    this.pauseSoundMenu = this.gamePauseScreen.querySelector(".soundsMenuCtn");
+    this.pauseKeybindMenu =
+      this.gamePauseScreen.querySelector(".keybindsMenuCtn");
+    this.pauseKeybindModal = this.gamePauseScreen.querySelector(".modal");
+  }
+
+  displaySelectedMenu(selectedMenu) {
+    this.allPauseMenus.forEach((menuElement) => {
+      menuElement.style.display = "none";
+    });
+
+    this[selectedMenu].style.display = "block";
+    this.currentlyDisplayedMenu = selectedMenu;
+  }
+
+  handleEscPress() {
+    this.allPauseMenus.forEach((menuElement) => {
+      menuElement.style.display = "none";
+    });
+    switch (this.currentlyDisplayedMenu) {
+      case "pauseKeybindMenu":
+      case "pauseSoundMenu":
+        this.pauseMainMenu.style.display = "block";
+        this.currentlyDisplayedMenu = "pauseMainMenu";
+        break;
+      case "pauseKeybindModal":
+        this.pauseKeybindMenu.style.display = "block";
+        this.currentlyDisplayedMenu = "pauseKeybindMenu";
+        this.currentlyReassigning = false;
+        break;
+    }
   }
 
   isKeyAlreadyAssigned(keyCode) {
