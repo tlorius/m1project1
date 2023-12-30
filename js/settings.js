@@ -12,6 +12,9 @@ class Settings {
     this.pauseKeybindMenu =
       this.gamePauseScreen.querySelector(".keybindsMenuCtn");
     this.pauseKeybindModal = this.gamePauseScreen.querySelector(".modal");
+    this.modalFeedbackText =
+      this.gamePauseScreen.querySelector("#feedbackText");
+    this.isFirstSetup = true;
   }
 
   displaySelectedMenu(selectedMenu) {
@@ -20,7 +23,7 @@ class Settings {
     this.pauseKeybindModal.style.display = "none";
     this.pauseSoundMenu.style.display = "none";
 
-    this[selectedMenu].style.display = "block";
+    this[selectedMenu].style.display = "flex";
     this.currentlyDisplayedMenu = selectedMenu;
   }
 
@@ -37,7 +40,7 @@ class Settings {
         this.currentlyDisplayedMenu = "pauseMainMenu";
         break;
       case "pauseKeybindModal":
-        this.pauseKeybindMenu.style.display = "block";
+        this.pauseKeybindMenu.style.display = "flex";
         this.currentlyDisplayedMenu = "pauseKeybindMenu";
         this.currentlyReassigning = false;
         break;
@@ -74,12 +77,36 @@ class Settings {
     this.keybindAimRight = "ArrowRight";
     this.keybindLevelUpDmg = "Space";
     this.keybindLevelUpAtkSpeed = "ShiftLeft";
+    if (!this.isFirstSetup) {
+      this.gamePauseScreen.querySelector(`#currentkeybindMoveUp`).innerText =
+        "KeyW";
+      this.gamePauseScreen.querySelector(`#currentkeybindMoveDown`).innerText =
+        "KeyS";
+      this.gamePauseScreen.querySelector(`#currentkeybindMoveLeft`).innerText =
+        "KeyA";
+      this.gamePauseScreen.querySelector(`#currentkeybindMoveRight`).innerText =
+        "KeyD";
+      this.gamePauseScreen.querySelector(`#currentkeybindAimUp`).innerText =
+        "ArrowUp";
+      this.gamePauseScreen.querySelector(`#currentkeybindAimDown`).innerText =
+        "ArrowDown";
+      this.gamePauseScreen.querySelector(`#currentkeybindAimLeft`).innerText =
+        "ArrowLeft";
+      this.gamePauseScreen.querySelector(`#currentkeybindAimRight`).innerText =
+        "ArrowRight";
+      this.gamePauseScreen.querySelector(
+        `#currentkeybindLevelUpDmg`
+      ).innerText = "Space";
+      this.gamePauseScreen.querySelector(
+        `#currentkeybindLevelUpAtkSpeed`
+      ).innerText = "ShiftLeft";
+    }
+    this.isFirstSetup = false;
   }
 
   startReassigning(selectedAction) {
     if (this.currentlyReassigning === false) {
       this.currentActionToChange = selectedAction;
-      console.log(this.currentActionToChange);
       this.currentlyReassigning = true;
     }
   }
@@ -87,11 +114,20 @@ class Settings {
   reassignKeybind(selectedKey) {
     if (this.currentlyReassigning === true) {
       if (this.isKeyAlreadyAssigned(selectedKey)) {
-        console.log(`This key is already in use`);
+        this.modalFeedbackText.innerText = `${selectedKey} is already in use by another keybind`;
       } else {
+        //reassign key in settings class
+        this.modalFeedbackText.innerText = `SUCCESS`;
         this[this.currentActionToChange] = selectedKey;
-        console.log(this.keybindLevelUpAtkSpeed);
+        //change the displayed div for the current keybind
+        this.gamePauseScreen.querySelector(
+          `#current${this.currentActionToChange}`
+        ).innerText = `${selectedKey}`;
         this.currentlyReassigning = false;
+        setTimeout(() => {
+          this.handleEscPress();
+          this.modalFeedbackText.innerText = "";
+        }, 500);
       }
     }
   }

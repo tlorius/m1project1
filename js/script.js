@@ -6,6 +6,8 @@ window.onload = function () {
   const nameHighscoreInput = document.getElementById("score-name");
   const keybindMenuBtn = document.querySelector(".keybindMenuItem");
   const soundMenuBtn = document.querySelector(".soundMenuItem");
+  const rebindBtn = document.querySelectorAll(".rebindBtn");
+  const restoreDefaultBtn = document.querySelector("#restoreDefaults");
   const rocket = document.getElementById("rocket");
   let isVisorOpen = false;
 
@@ -97,6 +99,7 @@ window.onload = function () {
     if (keyDown.code === game.settings.keybindMoveLeft) {
       game.player.directionX = -1;
     }
+
     if (keyDown.code === "Escape") {
       //pause game if its currently not paused
       if (!game.isGamePaused) {
@@ -118,6 +121,11 @@ window.onload = function () {
         game.settings.handleEscPress();
       }
     }
+
+    if (game.settings.currentlyReassigning === true) {
+      game.settings.reassignKeybind(keyDown.code);
+    }
+
     if (keyDown.code === game.settings.keybindLevelUpDmg) {
       game.player.upgradeWeaponDmg();
     }
@@ -130,28 +138,28 @@ window.onload = function () {
   document.addEventListener("keyup", (keyUp) => {
     // keyUp logic ensures that the player doesn't stop moving when switching directions
     switch (keyUp.code) {
-      case "KeyW":
+      case game.settings.keybindMoveUp:
         game.player.directionY =
           keyUp.code === game.settings.keybindMoveUp &&
           game.player.directionY === -1
             ? 0
             : game.player.directionY;
         break;
-      case "KeyS":
+      case game.settings.keybindMoveDown:
         game.player.directionY =
           keyUp.code === game.settings.keybindMoveDown &&
           game.player.directionY === 1
             ? 0
             : game.player.directionY;
         break;
-      case "KeyD":
+      case game.settings.keybindMoveRight:
         game.player.directionX =
           keyUp.code === game.settings.keybindMoveRight &&
           game.player.directionX === 1
             ? 0
             : game.player.directionX;
         break;
-      case "KeyA":
+      case game.settings.keybindMoveLeft:
         game.player.directionX =
           keyUp.code === game.settings.keybindMoveLeft &&
           game.player.directionX === -1
@@ -161,28 +169,28 @@ window.onload = function () {
     }
     // this switch statement ensures that the aim is return to neutral if keyUp events are registered
     switch (keyUp.code) {
-      case "ArrowUp":
+      case game.settings.keybindAimUp:
         game.player.aimingUp =
           keyUp.code === game.settings.keybindAimUp &&
           game.player.aimingUp === 1
             ? 0
             : game.player.aimingUp;
         break;
-      case "ArrowDown":
+      case game.settings.keybindAimDown:
         game.player.aimingUp =
           keyUp.code === game.settings.keybindAimDown &&
           game.player.aimingUp === -1
             ? 0
             : game.player.aimingUp;
         break;
-      case "ArrowRight":
+      case game.settings.keybindAimRight:
         game.player.aimingLeft =
           keyUp.code === game.settings.keybindAimRight &&
           game.player.aimingLeft === -1
             ? 0
             : game.player.aimingLeft;
         break;
-      case "ArrowLeft":
+      case game.settings.keybindAimLeft:
         game.player.aimingLeft =
           keyUp.code === game.settings.keybindAimLeft &&
           game.player.aimingLeft === 1
@@ -192,15 +200,22 @@ window.onload = function () {
     }
   });
 
-  keybindMenuBtn.addEventListener("click", () => {
-    //game.settings.startReassigning("keybindLevelUpAtkSpeed");
-    //game.settings.reassignKeybind("KeyP");
+  keybindMenuBtn.addEventListener("mouseup", () => {
     game.settings.displaySelectedMenu("pauseKeybindMenu");
   });
 
-  soundMenuBtn.addEventListener("click", () => {
-    //game.settings.startReassigning("keybindLevelUpAtkSpeed");
-    //game.settings.reassignKeybind("KeyP");
+  soundMenuBtn.addEventListener("mouseup", () => {
     game.settings.displaySelectedMenu("pauseSoundMenu");
   });
+
+  rebindBtn.forEach((btnElement) => {
+    btnElement.addEventListener("mouseup", (event) => {
+      game.settings.displaySelectedMenu("pauseKeybindModal");
+      game.settings.startReassigning(event.target.id);
+    });
+  });
+
+  restoreDefaultBtn.addEventListener("mouseup", () =>
+    game.settings.restoreDefaultKeybinds()
+  );
 };

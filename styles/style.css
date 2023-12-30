@@ -461,6 +461,7 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  user-select: none;
 }
 
 .modal {
@@ -478,31 +479,18 @@ h1 {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #13152a;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 1rem;
   width: 60%; /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-div.feedback {
+#feedbackText {
   color: red; /* or any color that indicates attention */
-  margin-top: 10px;
+  margin-top: 2rem;
+  font-size: 1.3rem;
 }
 
 .menuItemCtn {
@@ -514,6 +502,8 @@ div.feedback {
 .keybindsMenuCtn {
   display: none;
   cursor: pointer;
+  user-select: none;
+  flex-direction: row;
 }
 
 .soundsMenuCtn {
@@ -533,7 +523,7 @@ div.feedback {
   border-radius: 5px;
   box-shadow: 0 5px #999;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -547,4 +537,8 @@ div.feedback {
   background-color: #13152a;
   box-shadow: 0 2px #666;
   transform: translateY(4px);
+}
+
+#restoreDefaults {
+  margin-top: 2rem;
 }
