@@ -133,6 +133,7 @@ body {
 }
 
 #game-intro-screen {
+  user-select: none;
   font-family: "Nova Square";
   display: flex; /* play with this*/
   flex-direction: column;
@@ -373,10 +374,7 @@ input:checked + .demo-checkbox-button::before {
 #btn-start-game {
   height: 70px;
   width: 250px;
-  background-color: #313639;
-  color: white;
   border-radius: 40px;
-  border-color: #313639;
   font-size: 1.2rem;
 }
 
@@ -384,10 +382,7 @@ input:checked + .demo-checkbox-button::before {
   display: none;
   height: 70px;
   width: 250px;
-  background-color: #313639;
-  color: white;
   border-radius: 40px;
-  border-color: #313639;
   font-size: 1.2rem;
   margin: 30px;
 }
@@ -510,10 +505,6 @@ h1 {
   display: none;
 }
 
-.difficultyMenuCtn {
-  display: none;
-}
-
 .menuButton {
   padding: 10px 20px;
   margin: 10px;
@@ -541,4 +532,16 @@ h1 {
 
 #restoreDefaults {
   margin-top: 2rem;
+}
+
+.main-menu-btns {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
+.difficultyMenuCtn {
+  margin-left: 10vw;
+  display: flex;
+  align-items: center;
 }

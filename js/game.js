@@ -42,6 +42,7 @@ class Game {
     this.pauseStartTime = 0;
     this.highscores = [];
     this.currentPlayerHighscoreName = "";
+    this.difficulty = "default"; //can be easy, default, hard => i will add conditionals to class initializations on certain properties to change the gameplay
     //if this is true, modify start wave to 8,  give player 15 skill points and set level to 51
     this.demoModeActive = false;
   }

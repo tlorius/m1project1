@@ -1,6 +1,9 @@
 window.onload = function () {
   const startGameBtn = document.getElementById("btn-start-game");
   const restartGameBtn = document.getElementById("btn-restart-game");
+  const setDifficulty = document.querySelector(".currentSetDifficulty");
+  const difficultyDown = document.querySelector(".difficultyDown");
+  const difficultyUp = document.querySelector(".difficultyUp");
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
   const nameHighscoreInput = document.getElementById("score-name");
@@ -20,6 +23,37 @@ window.onload = function () {
     mainMenuMusic.pause();
     mainMenuMusic.currentTime = 0;
   }
+
+  difficultyDown.addEventListener("click", () => {
+    switch (setDifficulty.innerText) {
+      case "EASY":
+        break;
+      case "DEFAULT":
+        setDifficulty.innerText = "EASY";
+        break;
+      case "HARD":
+        setDifficulty.innerText = "DEFAULT";
+        break;
+      case "TORTURE":
+        setDifficulty.innerText = "HARD";
+    }
+  });
+
+  difficultyUp.addEventListener("click", () => {
+    switch (setDifficulty.innerText) {
+      case "TORTURE":
+        break;
+      case "HARD":
+        setDifficulty.innerText = "TORTURE";
+        break;
+      case "DEFAULT":
+        setDifficulty.innerText = "HARD";
+        break;
+      case "EASY":
+        setDifficulty.innerText = "DEFAULT";
+        break;
+    }
+  });
 
   // input field for name in highscore -> needs to pass the value to game
   nameHighscoreInput.addEventListener("keydown", (event) => {
@@ -52,6 +86,7 @@ window.onload = function () {
     if (demoMode) {
       game.demoModeActive = true;
     }
+    game.difficulty = setDifficulty.innerText.toLowerCase();
     game.startGame();
   }
 

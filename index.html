@@ -17,10 +17,19 @@
     <div id="game-intro-screen">
       <h1>The lone guardian of the galaxy</h1>
       <img id="rocket" src="images/player_down.png" alt="Intro Image" />
-      <button id="btn-start-game">Start Game</button>
-      <div class="difficultyMenuCtn">
-        <p>change Difficulty</p>
+      <div class="main-menu-btns">
+        <button id="btn-start-game" class="menuButton">Start Game</button>
+        <div class="difficultyMenuCtn">
+          <button class="menuButton difficultyDown"><</button>
+          <div class="menuButton">
+            <p>Difficulty:</p>
+            <p class="currentSetDifficulty">Default</p>
+          </div>
+          <button class="menuButton difficultyUp">></button>
+        </div>
       </div>
+      
+      
       <p id="game-introduction-text">In the year 2154, a lone guardian faces the vast expanse of space, surrounded by relentless and hostile lifeforms eager for a cosmic showdown.
 
         Your role is pivotal: navigate this brave defender through the onslaught of enemy waves, each one pushing the boundaries of survival. The fate of the guardian rests in your hands. Can you stand tall against the cosmic threats and ensure the guardian's triumph? The universe awaits your courage and skill in this epic battle for survival.</p>
@@ -117,7 +126,7 @@
       <p id="wave-announcement">You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <p>Final Score= <span id="score-post-game">0</span></p>
       <input type="text" id="score-name" placeholder="Enter your name to save your highscore and confirm with Enter!">
-      <button id="btn-restart-game">Restart</button>
+      <button id="btn-restart-game" class="menuButton">Restart</button>
 
       <div id="highscore-screen">
         
