@@ -46,11 +46,11 @@ class Game {
     //initializations on certain properties to change the gameplay
     this.accuracy = { bulletsHit: 0, bulletsMissed: 0 };
     this.scoreMultiplier =
-      difficulty === "easy"
+      this.difficulty === "easy"
         ? 1
-        : difficulty === "default"
+        : this.difficulty === "default"
         ? 1.5
-        : difficulty === "hard"
+        : this.difficulty === "hard"
         ? 2
         : 3;
 
