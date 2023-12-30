@@ -17,15 +17,30 @@
     <div id="game-intro-screen">
       <h1>The lone guardian of the galaxy</h1>
       <img id="rocket" src="images/player_down.png" alt="Intro Image" />
-      <button id="btn-start-game">Start Game</button>
+      <div class="main-menu-btns">
+        <button id="btn-start-game" class="menuButton">Start Game</button>
+        <div class="difficultyMenuCtn">
+          <button class="menuButton difficultyDown"><</button>
+          <div class="menuButton">
+            <p>Difficulty:</p>
+            <p class="currentSetDifficulty">Default</p>
+          </div>
+          <button class="menuButton difficultyUp">></button>
+        </div>
+      </div>
+      
+      
       <p id="game-introduction-text">In the year 2154, a lone guardian faces the vast expanse of space, surrounded by relentless and hostile lifeforms eager for a cosmic showdown.
 
         Your role is pivotal: navigate this brave defender through the onslaught of enemy waves, each one pushing the boundaries of survival. The fate of the guardian rests in your hands. Can you stand tall against the cosmic threats and ensure the guardian's triumph? The universe awaits your courage and skill in this epic battle for survival.</p>
-      <div class="toggle-demo-container">
+      <!--
+        <div class="toggle-demo-container">
         <input type="checkbox" id="demo-checkbox">
         <label for="demo-checkbox" class="demo-checkbox-button"></label>
         <p>Enable Demo-Mode</p>
       </div>
+      -->
+        
     </div>
 
     <div id="container-game">
@@ -65,37 +80,57 @@
     </div>
 
     <div id="game-pause-screen">
-      <h2>Game is paused...press Esc to unpause it</h2>
-      <div class="menuItemCtn allMenuScreens">
-        <p class="keybindMenuItem">Change Keybinds <button type="button" id="testkbbutton">Test change kb</button></p>
-        <p class="soundMenuItem">Sound Settings</p>
-        <p class="difficultyMenuItem">Adjust Difficulty</p>
+      <div class="mainMenuCtn">
+        <h2>Game is paused...press Esc to unpause it</h2>
+        <div class="menuItemCtn">
+          <p class="keybindMenuItem menuButton">Change Keybinds</p>
+          <p class="soundMenuItem menuButton">Sound Settings</p>
+        </div>
       </div>
       <div class="keybindsMenuCtn">
-        <p>rebind move up</p>
-        <p>rebind move left</p>
+        <div class="keybindsLeft">
+          <p id="keybindMoveUp" class="rebindBtn menuButton">rebind move up</p>
+          <p id="keybindMoveDown" class="rebindBtn menuButton">rebind move down</p>
+          <p id="keybindMoveLeft" class="rebindBtn menuButton">rebind move left</p>
+          <p id="keybindMoveRight" class="rebindBtn menuButton">rebind move right</p>
+          <p id="keybindAimUp" class="rebindBtn menuButton">rebind aim up</p>
+          <p id="keybindAimDown" class="rebindBtn menuButton">rebind aim down</p>
+          <p id="keybindAimLeft" class="rebindBtn menuButton">rebind aim left</p>
+          <p id="keybindAimRight" class="rebindBtn menuButton">rebind aim right</p>
+          <p id="keybindLevelUpDmg" class="rebindBtn menuButton">rebind level up bullet damage</p>
+          <p id="keybindLevelUpAtkSpeed" class="rebindBtn menuButton">rebind level up attack speed</p>
+          <p id="restoreDefaults" class="menuButton">restore default binds</p>
+        </div>
+        <div class="keybindsRight">
+          <p id="currentkeybindMoveUp" class="menuButton">KeyW</p>
+          <p id="currentkeybindMoveDown" class="menuButton">KeyS</p>
+          <p id="currentkeybindMoveLeft" class="menuButton">KeyA</p>
+          <p id="currentkeybindMoveRight" class="menuButton">KeyD</p>
+          <p id="currentkeybindAimUp" class="menuButton">Arrow Up</p>
+          <p id="currentkeybindAimDown" class="menuButton">Arrow Down</p>
+          <p id="currentkeybindAimLeft" class="menuButton">Arrow Left</p>
+          <p id="currentkeybindAimRight" class="menuButton">Arrow Right</p>
+          <p id="currentkeybindLevelUpDmg" class="menuButton">ShiftLeft</p>
+          <p id="currentkeybindLevelUpAtkSpeed" class="menuButton">Space</p>
+        </div>
       </div>
-      <div id="keybindModal" class="modal allMenuScreens">
+      <div id="keybindModal" class="modal">
         <div class="modal-content">
-          <span class="close-button">×</span>
-          <p id="modalText">Enter new key for <span id="keybindName">keybind X</span></p>
+          <p id="modalText">Press new key to <span id="keybindName">keybind X</span></p>
           <p id="feedbackText" class="feedback"></p>
         </div>
       </div>
-      <div class="soundsMenuCtn allMenuScreens">
-        <p>change volume</p>
+      <div class="soundsMenuCtn">
+        <p>WIP: change volume</p>
       </div>
-      <div class="difficultyMenuCtn allMenuScreens">
-        <p>change Difficulty</p>
-      </div>
-      <audio id="pause-music" src="audio/pausemusic.m4a"></audio>
     </div>
 
     <div id="post-game-screen">
       <p id="wave-announcement">You reached Wave: <span id="wave-post-game">0</span></p><!--still have to link that-->
       <p>Final Score= <span id="score-post-game">0</span></p>
+      <p>You hit <span id="accuracyInPercent">0</span>% of the bullets you shot at enemies!</p>
       <input type="text" id="score-name" placeholder="Enter your name to save your highscore and confirm with Enter!">
-      <button id="btn-restart-game">Restart</button>
+      <button id="btn-restart-game" class="menuButton">Restart</button>
 
       <div id="highscore-screen">
         

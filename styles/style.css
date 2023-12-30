@@ -133,6 +133,7 @@ body {
 }
 
 #game-intro-screen {
+  user-select: none;
   font-family: "Nova Square";
   display: flex; /* play with this*/
   flex-direction: column;
@@ -373,10 +374,7 @@ input:checked + .demo-checkbox-button::before {
 #btn-start-game {
   height: 70px;
   width: 250px;
-  background-color: #313639;
-  color: white;
   border-radius: 40px;
-  border-color: #313639;
   font-size: 1.2rem;
 }
 
@@ -384,10 +382,7 @@ input:checked + .demo-checkbox-button::before {
   display: none;
   height: 70px;
   width: 250px;
-  background-color: #313639;
-  color: white;
   border-radius: 40px;
-  border-color: #313639;
   font-size: 1.2rem;
   margin: 30px;
 }
@@ -461,6 +456,7 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  user-select: none;
 }
 
 .modal {
@@ -478,49 +474,106 @@ h1 {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #13152a;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 1rem;
   width: 60%; /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-div.feedback {
+#feedbackText {
   color: red; /* or any color that indicates attention */
-  margin-top: 10px;
+  margin-top: 2rem;
+  font-size: 1.3rem;
 }
 
 .menuItemCtn {
   margin-top: 5rem;
-  border-radius: 1rem;
-  padding: 1rem 3rem;
-  background-color: #313639;
-  border: solid black 0.2rem;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .keybindsMenuCtn {
   display: none;
+  cursor: pointer;
+  user-select: none;
+  flex-direction: row;
 }
 
 .soundsMenuCtn {
   display: none;
 }
 
+.menuButton {
+  padding: 10px 20px;
+  margin: 10px;
+  color: white;
+  background: #0a0b1a;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 5px #999;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  background-color: #13152a;
+}
+
+.menuButton:active {
+  background-color: #13152a;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+#restoreDefaults {
+  margin-top: 2rem;
+}
+
+.main-menu-btns {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
 .difficultyMenuCtn {
-  display: none;
+  margin-left: 10vw;
+  display: flex;
+  align-items: center;
+}
+
+#volumeSlider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+#volumeSlider:hover {
+  opacity: 1; /* Fully opaque on hover */
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+#volumeSlider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }

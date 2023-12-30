@@ -1,10 +1,16 @@
 window.onload = function () {
   const startGameBtn = document.getElementById("btn-start-game");
   const restartGameBtn = document.getElementById("btn-restart-game");
+  const setDifficulty = document.querySelector(".currentSetDifficulty");
+  const difficultyDown = document.querySelector(".difficultyDown");
+  const difficultyUp = document.querySelector(".difficultyUp");
   const mainMenuMusic = document.getElementById("main_menu_sound");
   const demoButtonToggle = document.getElementById("demo-checkbox");
   const nameHighscoreInput = document.getElementById("score-name");
-  const rebindBtn = document.getElementById("testkbbutton");
+  const keybindMenuBtn = document.querySelector(".keybindMenuItem");
+  const soundMenuBtn = document.querySelector(".soundMenuItem");
+  const rebindBtn = document.querySelectorAll(".rebindBtn");
+  const restoreDefaultBtn = document.querySelector("#restoreDefaults");
   const rocket = document.getElementById("rocket");
   let isVisorOpen = false;
 
@@ -17,6 +23,37 @@ window.onload = function () {
     mainMenuMusic.pause();
     mainMenuMusic.currentTime = 0;
   }
+
+  difficultyDown.addEventListener("click", () => {
+    switch (setDifficulty.innerText) {
+      case "EASY":
+        break;
+      case "DEFAULT":
+        setDifficulty.innerText = "EASY";
+        break;
+      case "HARD":
+        setDifficulty.innerText = "DEFAULT";
+        break;
+      case "TORTURE":
+        setDifficulty.innerText = "HARD";
+    }
+  });
+
+  difficultyUp.addEventListener("click", () => {
+    switch (setDifficulty.innerText) {
+      case "TORTURE":
+        break;
+      case "HARD":
+        setDifficulty.innerText = "TORTURE";
+        break;
+      case "DEFAULT":
+        setDifficulty.innerText = "HARD";
+        break;
+      case "EASY":
+        setDifficulty.innerText = "DEFAULT";
+        break;
+    }
+  });
 
   // input field for name in highscore -> needs to pass the value to game
   nameHighscoreInput.addEventListener("keydown", (event) => {
@@ -39,16 +76,17 @@ window.onload = function () {
       firstClick = false;
     }
   });
-
+  /* deprecated
   demoButtonToggle.addEventListener("click", () => {
     demoMode = demoButtonToggle.checked;
-  });
+  });*/
 
   function startNewGame() {
     game = new Game();
-    if (demoMode) {
+    /* if (demoMode) {
       game.demoModeActive = true;
-    }
+    }*/
+    game.difficulty = setDifficulty.innerText.toLowerCase();
     game.startGame();
   }
 
@@ -96,17 +134,33 @@ window.onload = function () {
     if (keyDown.code === game.settings.keybindMoveLeft) {
       game.player.directionX = -1;
     }
+
     if (keyDown.code === "Escape") {
-      game.pauseGame();
-      game.unpauseGame();
-      game.isGamePaused = !game.isGamePaused;
+      //pause game if its currently not paused
       if (!game.isGamePaused) {
+        game.pauseGame();
+        game.isGamePaused = true;
+        //unpause game if its paused and we are on the top level menu of the pause screen
+      } else if (
+        game.isGamePaused &&
+        game.settings.currentlyDisplayedMenu === "pauseMainMenu"
+      ) {
+        game.unpauseGame();
+        game.isGamePaused = false;
         game.gamePauseScreen.style.display = "none";
         game.mainGameScreen.style.display = "block";
         game.toolTipsUi.style.display = "block";
         game.gameLoop();
+        //handle reverse menu navigation in any other case using esc button
+      } else {
+        game.settings.handleEscPress();
       }
     }
+
+    if (game.settings.currentlyReassigning === true) {
+      game.settings.reassignKeybind(keyDown.code);
+    }
+
     if (keyDown.code === game.settings.keybindLevelUpDmg) {
       game.player.upgradeWeaponDmg();
     }
@@ -119,28 +173,28 @@ window.onload = function () {
   document.addEventListener("keyup", (keyUp) => {
     // keyUp logic ensures that the player doesn't stop moving when switching directions
     switch (keyUp.code) {
-      case "KeyW":
+      case game.settings.keybindMoveUp:
         game.player.directionY =
           keyUp.code === game.settings.keybindMoveUp &&
           game.player.directionY === -1
             ? 0
             : game.player.directionY;
         break;
-      case "KeyS":
+      case game.settings.keybindMoveDown:
         game.player.directionY =
           keyUp.code === game.settings.keybindMoveDown &&
           game.player.directionY === 1
             ? 0
             : game.player.directionY;
         break;
-      case "KeyD":
+      case game.settings.keybindMoveRight:
         game.player.directionX =
           keyUp.code === game.settings.keybindMoveRight &&
           game.player.directionX === 1
             ? 0
             : game.player.directionX;
         break;
-      case "KeyA":
+      case game.settings.keybindMoveLeft:
         game.player.directionX =
           keyUp.code === game.settings.keybindMoveLeft &&
           game.player.directionX === -1
@@ -150,28 +204,28 @@ window.onload = function () {
     }
     // this switch statement ensures that the aim is return to neutral if keyUp events are registered
     switch (keyUp.code) {
-      case "ArrowUp":
+      case game.settings.keybindAimUp:
         game.player.aimingUp =
           keyUp.code === game.settings.keybindAimUp &&
           game.player.aimingUp === 1
             ? 0
             : game.player.aimingUp;
         break;
-      case "ArrowDown":
+      case game.settings.keybindAimDown:
         game.player.aimingUp =
           keyUp.code === game.settings.keybindAimDown &&
           game.player.aimingUp === -1
             ? 0
             : game.player.aimingUp;
         break;
-      case "ArrowRight":
+      case game.settings.keybindAimRight:
         game.player.aimingLeft =
           keyUp.code === game.settings.keybindAimRight &&
           game.player.aimingLeft === -1
             ? 0
             : game.player.aimingLeft;
         break;
-      case "ArrowLeft":
+      case game.settings.keybindAimLeft:
         game.player.aimingLeft =
           keyUp.code === game.settings.keybindAimLeft &&
           game.player.aimingLeft === 1
@@ -181,8 +235,22 @@ window.onload = function () {
     }
   });
 
-  rebindBtn.addEventListener("click", () => {
-    game.settings.startReassigning("keybindLevelUpAtkSpeed");
-    game.settings.reassignKeybind("KeyP");
+  keybindMenuBtn.addEventListener("mouseup", () => {
+    game.settings.displaySelectedMenu("pauseKeybindMenu");
   });
+
+  soundMenuBtn.addEventListener("mouseup", () => {
+    game.settings.displaySelectedMenu("pauseSoundMenu");
+  });
+
+  rebindBtn.forEach((btnElement) => {
+    btnElement.addEventListener("mouseup", (event) => {
+      game.settings.displaySelectedMenu("pauseKeybindModal");
+      game.settings.startReassigning(event.target.id);
+    });
+  });
+
+  restoreDefaultBtn.addEventListener("mouseup", () =>
+    game.settings.restoreDefaultKeybinds()
+  );
 };

@@ -42,8 +42,20 @@ class Game {
     this.pauseStartTime = 0;
     this.highscores = [];
     this.currentPlayerHighscoreName = "";
-    //if this is true, modify start wave to 8,  give player 15 skill points and set level to 51
-    this.demoModeActive = false;
+    this.difficulty = "default"; //can be easy, default, hard, torture => i will add conditionals to class
+    //initializations on certain properties to change the gameplay
+    this.accuracy = { bulletsHit: 0, bulletsMissed: 0 };
+    this.scoreMultiplier =
+      this.difficulty === "easy"
+        ? 1
+        : this.difficulty === "default"
+        ? 1.5
+        : this.difficulty === "hard"
+        ? 2
+        : 3;
+
+    //deprecated - no longer using in main build
+    // this.demoModeActive = false;
   }
 
   sortHighscoresAndReturnTopTen(scoreArray) {
@@ -121,17 +133,18 @@ class Game {
     this.mainGameScreen.style.height = `${this.height}px`;
     this.mainGameScreen.style.width = `${this.width}px`;
 
-    this.player = new Player(this.mainGameScreen);
+    this.player = new Player(this.mainGameScreen, this.difficulty);
     this.playSound(this.gameplayMusic, 0.04); //0.04
     this.mainMenuMusic.remove();
 
+    /* DEMO MODE: deprecated - no longer using in main build
     if (this.demoModeActive) {
       this.enemySpawning.currentWave = 8;
       this.player.level = 51;
       this.player.skillPointsAvailable = 15;
       this.player.health = 30;
       this.player.speed = 180;
-    }
+    }*/
 
     this.gameLoop();
   }
@@ -220,6 +233,7 @@ class Game {
           currentProjectile.top > 640 ||
           currentProjectile.left > 610
         ) {
+          this.accuracy.bulletsMissed += 1;
           currentProjectile.element.remove();
         } else {
           let projectileStillActive = true;
@@ -229,9 +243,11 @@ class Game {
               const diedFromDmg = currentEnemy.diedFromReceivedDamage(
                 currentProjectile.damage
               );
+              this.accuracy.bulletsHit += 1;
               //score addition and priming enemy for removal
               if (diedFromDmg) {
-                this.player.score += currentEnemy.pointsReceivedIfKilled;
+                this.player.score +=
+                  this.scoreMultiplier * currentEnemy.pointsReceivedIfKilled;
                 this.player.gainExperience(currentEnemy.experienceIfKilled);
                 this.updateExperienceBar();
                 enemiesToRemove.push(currentEnemy);
@@ -354,7 +370,7 @@ class Game {
         }
       }
       //powerup spawning chance logic
-      if (this.player.canPowerUpSpawn()) {
+      if (this.player.canPowerUpSpawn() && this.difficulty !== "torture") {
         this.powerUps.push(new Powerup(this.mainGameScreen));
         const newPowerUp = this.powerUps[this.powerUps.length - 1];
         if (newPowerUp.typeRandomizer === "star") {
@@ -419,6 +435,11 @@ class Game {
 
       if (this.gameState === "Win" || this.gameState === "Lose") {
         //Code for won game or lost game, can replace with second if else statement if needed to separate
+        document.getElementById("accuracyInPercent").innerText = (
+          (this.accuracy.bulletsHit /
+            (this.accuracy.bulletsHit + this.accuracy.bulletsMissed)) *
+          100
+        ).toFixed(2);
         this.getHighscores();
 
         //Specific Win logic
