@@ -45,6 +45,14 @@ class Game {
     this.difficulty = "default"; //can be easy, default, hard, torture => i will add conditionals to class
     //initializations on certain properties to change the gameplay
     this.accuracy = { bulletsHit: 0, bulletsMissed: 0 };
+    this.scoreMultiplier =
+      difficulty === "easy"
+        ? 1
+        : difficulty === "default"
+        ? 1.5
+        : difficulty === "hard"
+        ? 2
+        : 3;
 
     //deprecated - no longer using in main build
     // this.demoModeActive = false;
@@ -238,7 +246,8 @@ class Game {
               this.accuracy.bulletsHit += 1;
               //score addition and priming enemy for removal
               if (diedFromDmg) {
-                this.player.score += currentEnemy.pointsReceivedIfKilled;
+                this.player.score +=
+                  this.scoreMultiplier * currentEnemy.pointsReceivedIfKilled;
                 this.player.gainExperience(currentEnemy.experienceIfKilled);
                 this.updateExperienceBar();
                 enemiesToRemove.push(currentEnemy);

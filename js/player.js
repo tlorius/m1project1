@@ -17,7 +17,14 @@ class Player extends Entity {
     this.experience = 0;
     this.level = 0;
     this.skillPointsAvailable = 0;
-    this.speed = 130;
+    this.speed =
+      difficulty === "easy"
+        ? 150
+        : difficulty === "default"
+        ? 130
+        : difficulty === "hard"
+        ? 120
+        : 110;
     this.health =
       difficulty === "easy"
         ? 30
@@ -56,6 +63,14 @@ class Player extends Entity {
         : difficulty === "hard"
         ? 1
         : 1; //1 default allow this to be modified by powerups
+    this.experienceMultiplier =
+      difficulty === "easy"
+        ? 2
+        : difficulty === "default"
+        ? 1
+        : difficulty === "hard"
+        ? 0.8
+        : 0.7;
     this.isInvincible = false;
     this.timeWhenStarConsumed;
 
@@ -123,7 +138,8 @@ class Player extends Entity {
   }
   //call everytime you kill a monster
   gainExperience(experienceGained) {
-    const newExperience = this.experience + experienceGained;
+    const newExperience =
+      this.experience + experienceGained * this.experienceMultiplier;
     if (Math.floor(this.experience / 100) < Math.floor(newExperience / 100)) {
       this.levelUp();
     }
