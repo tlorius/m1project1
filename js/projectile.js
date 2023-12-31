@@ -56,4 +56,21 @@ class Projectile extends Entity {
     this.updateSize();
     this.setInitialPos();
   }
+
+  didCollide(objectToCollideWith) {
+    const mainEntityRect = this.element.getBoundingClientRect();
+    const objectToCollideWithRect =
+      objectToCollideWith.element.getBoundingClientRect();
+
+    if (
+      mainEntityRect.left < objectToCollideWithRect.right &&
+      mainEntityRect.right > objectToCollideWithRect.left &&
+      mainEntityRect.top < objectToCollideWithRect.bottom &&
+      mainEntityRect.bottom > objectToCollideWithRect.top
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

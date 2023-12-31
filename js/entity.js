@@ -42,12 +42,21 @@ class Entity {
     const mainEntityRect = this.element.getBoundingClientRect();
     const objectToCollideWithRect =
       objectToCollideWith.element.getBoundingClientRect();
+    //reducing hitbox by 25% per side to create a more accurate hitbox of the actual character
+    const mainReducedHeight = 0.25 * mainEntityRect.height;
+    const mainReducedWidth = 0.25 * mainEntityRect.width;
+    const secondaryReducedHeight = 0.25 * objectToCollideWithRect.height;
+    const secondaryReducedWidth = 0.25 * objectToCollideWithRect.width;
 
     if (
-      mainEntityRect.left < objectToCollideWithRect.right &&
-      mainEntityRect.right > objectToCollideWithRect.left &&
-      mainEntityRect.top < objectToCollideWithRect.bottom &&
-      mainEntityRect.bottom > objectToCollideWithRect.top
+      mainEntityRect.left + mainReducedWidth <
+        objectToCollideWithRect.right - secondaryReducedWidth &&
+      mainEntityRect.right - mainReducedWidth >
+        objectToCollideWithRect.left + secondaryReducedWidth &&
+      mainEntityRect.top + mainReducedHeight <
+        objectToCollideWithRect.bottom - secondaryReducedHeight &&
+      mainEntityRect.bottom - mainReducedHeight >
+        objectToCollideWithRect.top + secondaryReducedHeight
     ) {
       return true;
     } else {

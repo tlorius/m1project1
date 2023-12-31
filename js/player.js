@@ -21,10 +21,10 @@ class Player extends Entity {
       difficulty === "easy"
         ? 150
         : difficulty === "default"
-        ? 130
+        ? 140
         : difficulty === "hard"
-        ? 120
-        : 110;
+        ? 130
+        : 125;
     this.health =
       difficulty === "easy"
         ? 30
