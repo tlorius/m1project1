@@ -16,3 +16,10 @@ class EnemyBoss extends Enemy {
     this.setInitialPos();
   }
 }
+
+/*Right now the boss has the same movement logic as all the other mobs
+Boss should have an ability with a cooldown to stand still and throw rocks/spit at the player
+think about if there should be different levels of accuracy and speed of the projectile based off reached wave and selected difficulty
+boss move method needs a variable = isCastingAbility. Then he wont be able to move.
+
+*/

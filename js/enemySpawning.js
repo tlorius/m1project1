@@ -4,6 +4,27 @@ class EnemySpawning {
     this.waveSpawnDetails = [
       //wavenumber to reference, odds of a slime spawning, odds of a bat spawning, odds of a boss spawning,
       // duration of wave in seconds, frequency of mobs spawning in seconds
+
+      /* Duration should always stay the same but the amount of mobs should vary and include a difficulty value
+      that goes up the longer you go
+      every 10th wave can still be the boss but there needs to be a logic to continue
+      Rework formula for monster hp/size to respect the difficulty value ontop of the inherent game difficulty value
+      then work from there
+      
+      figure out what to do with ratios of slimes vs bats. 
+      either we use the first 10 waves to ramp up and then slightly randomize, with more edge to bats when base difficulty is higher
+
+      also be careful about where the wavenumbers are referenced and updated.
+      Keep clean or transition to typescript.
+
+      Add a possible rogue like mechanic?
+      Collect coins when mobs die and spend them on permanent upgrades before the game.
+
+      lower difficulty drops more coins.
+      First rework and check the demo mode. -- make it a developer mode to test stuff
+
+      also rewrite the entire game in godot. probably makes it easier
+      */
       {
         wavenr: "wave1",
         slime: 1,

@@ -137,15 +137,6 @@ class Game {
     this.playSound(this.gameplayMusic, 0.04); //0.04
     this.mainMenuMusic.remove();
 
-    /* DEMO MODE: deprecated - no longer using in main build
-    if (this.demoModeActive) {
-      this.enemySpawning.currentWave = 8;
-      this.player.level = 51;
-      this.player.skillPointsAvailable = 15;
-      this.player.health = 30;
-      this.player.speed = 180;
-    }*/
-
     this.gameLoop();
   }
 
